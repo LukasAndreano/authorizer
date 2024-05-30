@@ -122,7 +122,7 @@ const Webhooks = () => {
 		<Box m="5" py="5" px="10" bg="white" rounded="md">
 			<Flex margin="2% 0" justifyContent="space-between" alignItems="center">
 				<Text fontSize="md" fontWeight="bold">
-					Webhooks
+					Вебхуки
 				</Text>
 				<UpdateWebhookModal
 					view={UpdateModalViews.ADD}
@@ -134,12 +134,12 @@ const Webhooks = () => {
 					<Table variant="simple">
 						<Thead>
 							<Tr>
-								<Th>Event Name</Th>
-								<Th>Event Description</Th>
+								<Th>Название события</Th>
+								<Th>Описание события</Th>
 								<Th>Endpoint</Th>
-								<Th>Enabled</Th>
-								<Th>Headers</Th>
-								<Th>Actions</Th>
+								<Th>Включено</Th>
+								<Th>Заголовки</Th>
+								<Th>Действия</Th>
 							</Tr>
 						</Thead>
 						<Tbody>
@@ -193,7 +193,7 @@ const Webhooks = () => {
 													alignItems="center"
 												>
 													<Text fontSize="sm" fontWeight="light">
-														Menu
+														Меню
 													</Text>
 													<FaAngleDown style={{ marginLeft: 10 }} />
 												</Flex>
@@ -227,7 +227,7 @@ const Webhooks = () => {
 									m="2% 0"
 								>
 									<Flex flex="1">
-										<Tooltip label="First Page">
+										<Tooltip label="Первая страница">
 											<IconButton
 												aria-label="icon button"
 												onClick={() =>
@@ -240,7 +240,7 @@ const Webhooks = () => {
 												icon={<FaAngleDoubleLeft />}
 											/>
 										</Tooltip>
-										<Tooltip label="Previous Page">
+										<Tooltip label="Предыдущая страница">
 											<IconButton
 												aria-label="icon button"
 												onClick={() =>
@@ -259,17 +259,17 @@ const Webhooks = () => {
 										alignItems="center"
 									>
 										<Text mr={8}>
-											Page{' '}
+											Страница{' '}
 											<Text fontWeight="bold" as="span">
 												{paginationProps.page}
 											</Text>{' '}
-											of{' '}
+											из{' '}
 											<Text fontWeight="bold" as="span">
 												{paginationProps.maxPages}
 											</Text>
 										</Text>
 										<Flex alignItems="center">
-											<Text>Go to page:</Text>{' '}
+											<Text>Перейти на страницу:</Text>{' '}
 											<NumberInput
 												ml={2}
 												mr={8}
@@ -302,13 +302,13 @@ const Webhooks = () => {
 										>
 											{pageLimits.map((pageSize) => (
 												<option key={pageSize} value={pageSize}>
-													Show {pageSize}
+													Показать {pageSize}
 												</option>
 											))}
 										</Select>
 									</Flex>
 									<Flex flex="1">
-										<Tooltip label="Next Page">
+										<Tooltip label="Следующая страница">
 											<IconButton
 												aria-label="icon button"
 												onClick={() =>
@@ -322,7 +322,7 @@ const Webhooks = () => {
 												icon={<FaAngleRight />}
 											/>
 										</Tooltip>
-										<Tooltip label="Last Page">
+										<Tooltip label="Последняя страница">
 											<IconButton
 												aria-label="icon button"
 												onClick={() =>
@@ -358,7 +358,7 @@ const Webhooks = () => {
 							fontWeight="bold"
 							color="#d9d9d9"
 						>
-							No Data
+							Нет данных
 						</Text>
 					</Flex>
 				)

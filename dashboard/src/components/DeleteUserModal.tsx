@@ -68,14 +68,14 @@ const DeleteUserModal = ({
 	};
 	return (
 		<>
-			<MenuItem onClick={onOpen}>Delete User</MenuItem>
+			<MenuItem onClick={onOpen}>Удалить пользователя</MenuItem>
 			<Modal isOpen={isOpen} onClose={onClose}>
 				<ModalOverlay />
 				<ModalContent>
-					<ModalHeader>Delete User</ModalHeader>
+					<ModalHeader>Удалить пользователя</ModalHeader>
 					<ModalCloseButton />
 					<ModalBody>
-						<Text fontSize="md">Are you sure?</Text>
+						<Text fontSize="md">Вы уверены?</Text>
 						<Flex
 							padding="5%"
 							marginTop="5%"
@@ -85,7 +85,7 @@ const DeleteUserModal = ({
 							flexDirection="column"
 						>
 							<Text fontSize="sm">
-								User <b>{user.email}</b> will be deleted permanently!
+								Пользователь <b>{user.email}</b> будет удален безвозвратно!
 							</Text>
 						</Flex>
 					</ModalBody>
@@ -99,7 +99,7 @@ const DeleteUserModal = ({
 							isDisabled={false}
 						>
 							<Center h="100%" pt="5%">
-								Delete
+								Удалить
 							</Center>
 						</Button>
 					</ModalFooter>

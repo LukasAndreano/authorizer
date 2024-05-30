@@ -61,14 +61,14 @@ const DeleteWebhookModal = ({
 	};
 	return (
 		<>
-			<MenuItem onClick={onOpen}>Delete</MenuItem>
+			<MenuItem onClick={onOpen}>Удалить</MenuItem>
 			<Modal isOpen={isOpen} onClose={onClose}>
 				<ModalOverlay />
 				<ModalContent>
-					<ModalHeader>Delete Webhook</ModalHeader>
+					<ModalHeader>Удалить вебхук</ModalHeader>
 					<ModalCloseButton />
 					<ModalBody>
-						<Text fontSize="md">Are you sure?</Text>
+						<Text fontSize="md">Вы уверены?</Text>
 						<Flex
 							padding="5%"
 							marginTop="5%"
@@ -78,8 +78,7 @@ const DeleteWebhookModal = ({
 							flexDirection="column"
 						>
 							<Text fontSize="sm">
-								Webhook for event <b>{eventName}</b> will be deleted
-								permanently!
+								Вебхук для события <b>{eventName}</b> будет удален безвозвратно!
 							</Text>
 						</Flex>
 					</ModalBody>
@@ -93,7 +92,7 @@ const DeleteWebhookModal = ({
 							isDisabled={false}
 						>
 							<Center h="100%" pt="5%">
-								Delete
+								Удалить
 							</Center>
 						</Button>
 					</ModalFooter>

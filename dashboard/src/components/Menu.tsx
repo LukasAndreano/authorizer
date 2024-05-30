@@ -62,59 +62,63 @@ interface LinkItemProps {
 }
 const LinkItems: Array<LinkItemProps> = [
 	{
-		name: 'Environment ',
+		name: 'Настройки',
 		icon: FiSettings,
 		route: '/',
 		subRoutes: [
 			{
-				name: 'OAuth Config',
+				name: 'Настройка OAuth',
 				icon: AiOutlineKey,
 				route: '/oauth-setting',
 			},
 
-			{ name: 'Roles', icon: FiUser, route: '/roles' },
+			{ name: 'Роли', icon: FiUser, route: '/roles' },
 			{
-				name: 'JWT Secrets',
+				name: 'Секреты JWT',
 				icon: SiJsonwebtokens,
 				route: '/jwt-config',
 			},
 			{
-				name: 'Session Storage',
+				name: 'Хранилище сессий',
 				icon: RiDatabase2Line,
 				route: '/session-storage',
 			},
 			{
-				name: 'Email Configurations',
+				name: 'Электронная почта',
 				icon: HiOutlineMail,
 				route: '/email-config',
 			},
 			{
-				name: 'Domain White Listing',
+				name: 'Вайтлист доменов',
 				icon: BsCheck2Circle,
 				route: '/whitelist-variables',
 			},
 			{
-				name: 'Organization Info',
+				name: 'Информация сайта',
 				icon: HiOutlineOfficeBuilding,
 				route: '/organization-info',
 			},
-			{ name: 'Access Token', icon: SiOpenaccess, route: '/access-token' },
+			{ name: 'Токен доступа', icon: SiOpenaccess, route: '/access-token' },
 			{
-				name: 'Features',
+				name: 'Функции',
 				icon: BiCustomize,
 				route: '/features',
 			},
-			{ name: 'Database', icon: RiDatabase2Line, route: '/db-cred' },
+			{ name: 'База данных', icon: RiDatabase2Line, route: '/db-cred' },
 			{
-				name: ' Security',
+				name: ' Безопасность',
 				icon: MdSecurity,
 				route: '/admin-secret',
 			},
 		],
 	},
-	{ name: 'Users', icon: FiUsers, route: '/users' },
-	{ name: 'Webhooks', icon: FiLink, route: '/webhooks' },
-	{ name: 'Email Templates', icon: FiFileText, route: '/email-templates' },
+	{ name: 'Пользователи', icon: FiUsers, route: '/users' },
+	{ name: 'Вебхуки', icon: FiLink, route: '/webhooks' },
+	{
+		name: 'Шаблоны почты',
+		icon: FiFileText,
+		route: '/email-templates',
+	},
 ];
 
 interface SidebarProps extends BoxProps {
@@ -244,7 +248,7 @@ export const Sidebar = ({ onClose, ...rest }: SidebarProps) => {
 						bottom="5"
 						left="7"
 					>
-						Current Version: {data.meta.version}
+						Текущая версия: {data.meta.version}
 					</Text>
 				</Flex>
 			)}
@@ -347,7 +351,7 @@ export const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
 									spacing="1px"
 									ml="2"
 								>
-									<Text fontSize="sm">Admin</Text>
+									<Text fontSize="sm">Администратор</Text>
 								</VStack>
 								<Box display={{ base: 'none', md: 'flex' }}>
 									<FiChevronDown />
@@ -358,7 +362,7 @@ export const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
 							bg={useColorModeValue('white', 'gray.900')}
 							borderColor={useColorModeValue('gray.200', 'gray.700')}
 						>
-							<MenuItem onClick={handleLogout}>Sign out</MenuItem>
+							<MenuItem onClick={handleLogout}>Выйти</MenuItem>
 						</MenuList>
 					</Menu>
 				</Flex>

@@ -40,18 +40,18 @@ const JSTConfigurations = ({
 				}),
 			);
 			toast({
-				title: `JWT config copied successfully`,
+				title: `Конфигурация JWT успешно скопирована`,
 				isClosable: true,
 				status: 'success',
 				position: 'top-right',
 			});
 		} catch (err) {
 			console.error({
-				message: `Failed to copy JWT config`,
+				message: `Не удалось скопировать конфигурацию JWT`,
 				error: err,
 			});
 			toast({
-				title: `Failed to copy JWT config`,
+				title: `Не удалось скопировать конфигурацию JWT`,
 				isClosable: true,
 				status: 'error',
 				position: 'top-right',
@@ -73,7 +73,7 @@ const JSTConfigurations = ({
 					fontWeight="bold"
 					mb={5}
 				>
-					JWT (JSON Web Tokens) Configurations
+					Конфигурации JWT (JSON Web Token)
 				</Text>
 				<Flex mb={7}>
 					<Button
@@ -83,7 +83,7 @@ const JSTConfigurations = ({
 						variant="ghost"
 						onClick={copyJSON}
 					>
-						Copy As JSON Config
+						Скопировать как JSON-конфигурацию
 					</Button>
 					<GenerateKeysModal jwtType={variables.JWT_TYPE} getData={getData} />
 				</Flex>
@@ -91,7 +91,7 @@ const JSTConfigurations = ({
 			<Stack spacing={6} padding="2% 0%">
 				<Flex direction={isNotSmallerScreen ? 'row' : 'column'}>
 					<Flex w="30%" justifyContent="start" alignItems="center">
-						<Text fontSize="sm">JWT Type:</Text>
+						<Text fontSize="sm">Тип JWT:</Text>
 					</Flex>
 					<Flex
 						w={isNotSmallerScreen ? '70%' : '100%'}
@@ -114,7 +114,7 @@ const JSTConfigurations = ({
 				{Object.values(HMACEncryptionType).includes(variables.JWT_TYPE) ? (
 					<Flex direction={isNotSmallerScreen ? 'row' : 'column'}>
 						<Flex w="30%" justifyContent="start" alignItems="center">
-							<Text fontSize="sm">JWT Secret</Text>
+							<Text fontSize="sm">Секрет JWT</Text>
 						</Flex>
 						<Center
 							w={isNotSmallerScreen ? '70%' : '100%'}
@@ -134,7 +134,7 @@ const JSTConfigurations = ({
 					<>
 						<Flex direction={isNotSmallerScreen ? 'row' : 'column'}>
 							<Flex w="30%" justifyContent="start" alignItems="center">
-								<Text fontSize="sm">Public Key</Text>
+								<Text fontSize="sm">Публичный ключ</Text>
 							</Flex>
 							<Center
 								w={isNotSmallerScreen ? '70%' : '100%'}
@@ -145,14 +145,14 @@ const JSTConfigurations = ({
 									variables={variables}
 									setVariables={setVariables}
 									inputType={TextAreaInputType.JWT_PUBLIC_KEY}
-									placeholder="Add public key here"
+									placeholder="Добавьте публичный ключ сюда"
 									minH="25vh"
 								/>
 							</Center>
 						</Flex>
 						<Flex direction={isNotSmallerScreen ? 'row' : 'column'}>
 							<Flex w="30%" justifyContent="start" alignItems="center">
-								<Text fontSize="sm">Private Key</Text>
+								<Text fontSize="sm">Приватный ключ</Text>
 							</Flex>
 							<Center
 								w={isNotSmallerScreen ? '70%' : '100%'}
@@ -163,7 +163,7 @@ const JSTConfigurations = ({
 									variables={variables}
 									setVariables={setVariables}
 									inputType={TextAreaInputType.JWT_PRIVATE_KEY}
-									placeholder="Add private key here"
+									placeholder="Добавьте приватный ключ сюда"
 									minH="25vh"
 								/>
 							</Center>

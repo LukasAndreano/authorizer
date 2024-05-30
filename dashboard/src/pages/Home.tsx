@@ -5,13 +5,13 @@ export default function Home() {
 	return (
 		<>
 			<Text fontSize="2xl" fontWeight="bold">
-				Hi there 👋 <br />
+				Привет 👋 <br />
 			</Text>
 
 			<Text fontSize="xl" color="gray.700">
-				Welcome to Authorizer Administrative Dashboard! <br />
-				Please use this dashboard to configure your environment variables or
-				have look at your users
+				Добро пожаловать в админку Authorizer! <br />
+				Пожалуйста, используйте эту панель для настройки переменных окружения
+				или просмотра ваших пользователей
 			</Text>
 		</>
 	);

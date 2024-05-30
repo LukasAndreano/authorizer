@@ -216,9 +216,9 @@ const Environment = () => {
 		getData();
 
 		toast({
-			title: `Successfully updated ${
+			title: `Успешно обновлено ${
 				Object.keys(updatedEnvVariables).length
-			} variables`,
+			} переменных`,
 			isClosable: true,
 			status: 'success',
 			position: 'top-right',
@@ -337,7 +337,7 @@ const Environment = () => {
 						onClick={saveHandler}
 						isDisabled={loading}
 					>
-						Save
+						Сохранить
 					</Button>
 				</Flex>
 			</Stack>

@@ -1,5 +1,5 @@
 import React from 'react';
-import { useAuthorizer } from '@authorizerdev/authorizer-react';
+import { useAuthorizer } from 'kokateam-authorizer-react';
 
 export default function Dashboard() {
 	const [loading, setLoading] = React.useState(false);
@@ -14,10 +14,10 @@ export default function Dashboard() {
 
 	return (
 		<div>
-			<h1>Hey 👋,</h1>
-			<p>Thank you for using authorizer.</p>
+			<h1>Привет 👋,</h1>
+			<p>Спасибо за использование сервиса.</p>
 			<p>
-				Your email address is{' '}
+				Твой адрес электронной почты:{' '}
 				<a href={`mailto:${user?.email}`} style={{ color: '#3B82F6' }}>
 					{user?.email}
 				</a>
@@ -25,7 +25,7 @@ export default function Dashboard() {
 
 			<br />
 			{loading ? (
-				<h3>Processing....</h3>
+				<h3>Обработка...</h3>
 			) : (
 				<h3
 					style={{
@@ -34,7 +34,7 @@ export default function Dashboard() {
 					}}
 					onClick={onLogout}
 				>
-					Logout
+					Выйти
 				</h3>
 			)}
 		</div>

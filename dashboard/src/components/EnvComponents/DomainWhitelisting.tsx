@@ -9,12 +9,12 @@ const DomainWhiteListing = ({ variables, setVariables }: any) => {
 		<div>
 			{' '}
 			<Text fontSize="md" paddingTop="2%" fontWeight="bold" mb={5}>
-				Domain White Listing
+				Доменные исключения
 			</Text>
 			<Stack spacing={6} padding="2% 0%">
 				<Flex direction={isNotSmallerScreen ? 'row' : 'column'}>
 					<Flex w="30%" justifyContent="start" alignItems="center">
-						<Text fontSize="sm">Allowed Origins:</Text>
+						<Text fontSize="sm">Разрешенные источники:</Text>
 					</Flex>
 					<Center
 						w={isNotSmallerScreen ? '70%' : '100%'}

@@ -10,13 +10,13 @@ const DatabaseCredentials = ({ variables, setVariables }: any) => {
 		<div>
 			{' '}
 			<Text fontSize="md" paddingTop="2%" fontWeight="bold">
-				Database Credentials
+				Учетные данные базы данных
 			</Text>
 			<Stack spacing={6} padding="3% 0">
 				<Text fontStyle="italic" fontSize="sm" color="blackAlpha.500" mt={3}>
-					Note: Database related environment variables cannot be updated from
-					dashboard. Please use .env file or OS environment variables to update
-					it.
+					Примечание: Переменные среды, связанные с базой данных, не могут быть
+					обновлены из панели управления. Пожалуйста, используйте файл .env или
+					переменные среды ОС для их обновления.
 				</Text>
 				<Flex direction={isNotSmallerScreen ? 'row' : 'column'}>
 					<Flex
@@ -24,7 +24,7 @@ const DatabaseCredentials = ({ variables, setVariables }: any) => {
 						justifyContent="start"
 						alignItems="center"
 					>
-						<Text fontSize="sm">DataBase Name:</Text>
+						<Text fontSize="sm">Имя базы данных:</Text>
 					</Flex>
 					<Center
 						w={isNotSmallerScreen ? '70%' : '100%'}
@@ -45,7 +45,7 @@ const DatabaseCredentials = ({ variables, setVariables }: any) => {
 						justifyContent="start"
 						alignItems="center"
 					>
-						<Text fontSize="sm">DataBase Type:</Text>
+						<Text fontSize="sm">Тип базы данных:</Text>
 					</Flex>
 					<Center
 						w={isNotSmallerScreen ? '70%' : '100%'}
@@ -66,7 +66,7 @@ const DatabaseCredentials = ({ variables, setVariables }: any) => {
 						justifyContent="start"
 						alignItems="center"
 					>
-						<Text fontSize="sm">DataBase URL:</Text>
+						<Text fontSize="sm">URL базы данных:</Text>
 					</Flex>
 					<Center
 						w={isNotSmallerScreen ? '70%' : '100%'}

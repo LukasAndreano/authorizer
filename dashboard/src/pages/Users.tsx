@@ -188,14 +188,14 @@ export default function Users() {
 			.toPromise();
 		if (res.error) {
 			toast({
-				title: 'User verification failed',
+				title: 'Ошибка подтверждения пользователя',
 				isClosable: true,
 				status: 'error',
 				position: 'top-right',
 			});
 		} else if (res.data?._update_user?.id) {
 			toast({
-				title: 'User verification successful',
+				title: 'Пользователь успешно подтвержден',
 				isClosable: true,
 				status: 'success',
 				position: 'top-right',
@@ -219,14 +219,14 @@ export default function Users() {
 					.toPromise();
 				if (enableAccessRes.error) {
 					toast({
-						title: 'User access enable failed',
+						title: 'Не удалось предоставить доступ пользователю',
 						isClosable: true,
 						status: 'error',
 						position: 'top-right',
 					});
 				} else {
 					toast({
-						title: 'User access enabled successfully',
+						title: 'Доступ пользователю успешно предоставлен',
 						isClosable: true,
 						status: 'success',
 						position: 'top-right',
@@ -244,14 +244,14 @@ export default function Users() {
 					.toPromise();
 				if (revokeAccessRes.error) {
 					toast({
-						title: 'User access revoke failed',
+						title: 'Не удалось отозвать доступ пользователя',
 						isClosable: true,
 						status: 'error',
 						position: 'top-right',
 					});
 				} else {
 					toast({
-						title: 'User access revoked successfully',
+						title: 'Доступ пользователя успешно отозван',
 						isClosable: true,
 						status: 'success',
 						position: 'top-right',
@@ -274,9 +274,9 @@ export default function Users() {
 			.toPromise();
 		if (res.data?._update_user?.id) {
 			toast({
-				title: `Multi factor authentication ${
-					user.is_multi_factor_auth_enabled ? 'disabled' : 'enabled'
-				} for user`,
+				title: `Многофакторная аутентификация ${
+					user.is_multi_factor_auth_enabled ? 'отключена' : 'включена'
+				} для пользователя`,
 				isClosable: true,
 				status: 'success',
 				position: 'top-right',
@@ -285,7 +285,8 @@ export default function Users() {
 			return;
 		}
 		toast({
-			title: 'Multi factor authentication update failed for user',
+			title:
+				'Не удалось обновить многофакторную аутентификацию для пользователя',
 			isClosable: true,
 			status: 'error',
 			position: 'top-right',
@@ -296,7 +297,7 @@ export default function Users() {
 		<Box m="5" py="5" px="10" bg="white" rounded="md">
 			<Flex margin="2% 0" justifyContent="space-between" alignItems="center">
 				<Text fontSize="md" fontWeight="bold">
-					Users
+					Пользователи
 				</Text>
 				<InviteMembersModal
 					disabled={disableInviteMembers}
@@ -309,18 +310,18 @@ export default function Users() {
 						<Table variant="simple">
 							<Thead>
 								<Tr>
-									<Th>Email / Phone</Th>
-									<Th>Created At</Th>
-									<Th>Signup Methods</Th>
-									<Th>Roles</Th>
-									<Th>Verified</Th>
-									<Th>Access</Th>
+									<Th>Email / Телефон</Th>
+									<Th>Дата создания</Th>
+									<Th>Способы регистрации</Th>
+									<Th>Роли</Th>
+									<Th>Подтверждено</Th>
+									<Th>Доступ</Th>
 									<Th>
-										<Tooltip label="MultiFactor Authentication Enabled / Disabled">
+										<Tooltip label="Многофакторная аутентификация включена / отключена">
 											MFA
 										</Tooltip>
 									</Th>
-									<Th>Actions</Th>
+									<Th>Действия</Th>
 								</Tr>
 							</Thead>
 							<Tbody>
@@ -360,7 +361,7 @@ export default function Users() {
 													variant="outline"
 													colorScheme={user.revoked_timestamp ? 'red' : 'green'}
 												>
-													{user.revoked_timestamp ? 'Revoked' : 'Enabled'}
+													{user.revoked_timestamp ? 'Отозван' : 'Предоставлен'}
 												</Tag>
 											</Td>
 											<Td>
@@ -372,8 +373,8 @@ export default function Users() {
 													}
 												>
 													{user.is_multi_factor_auth_enabled
-														? 'Enabled'
-														: 'Disabled'}
+														? 'Включено'
+														: 'Отключено'}
 												</Tag>
 											</Td>
 											<Td>
@@ -384,7 +385,7 @@ export default function Users() {
 															alignItems="center"
 														>
 															<Text fontSize="sm" fontWeight="light">
-																Menu
+																Меню
 															</Text>
 															<FaAngleDown style={{ marginLeft: 10 }} />
 														</Flex>
@@ -395,7 +396,7 @@ export default function Users() {
 																<MenuItem
 																	onClick={() => userVerificationHandler(user)}
 																>
-																	Verify User
+																	Подтвердить пользователя
 																</MenuItem>
 															)}
 														<EditUserModal
@@ -415,7 +416,7 @@ export default function Users() {
 																	)
 																}
 															>
-																Enable Access
+																Предоставить доступ
 															</MenuItem>
 														) : (
 															<MenuItem
@@ -426,7 +427,7 @@ export default function Users() {
 																	)
 																}
 															>
-																Revoke Access
+																Отозвать доступ
 															</MenuItem>
 														)}
 														{user.is_multi_factor_auth_enabled ? (
@@ -435,7 +436,7 @@ export default function Users() {
 																	multiFactorAuthUpdateHandler(user)
 																}
 															>
-																Disable MultiFactor Authentication
+																Отключить многофакторную аутентификацию
 															</MenuItem>
 														) : (
 															<MenuItem
@@ -443,7 +444,7 @@ export default function Users() {
 																	multiFactorAuthUpdateHandler(user)
 																}
 															>
-																Enable MultiFactor Authentication
+																Включить многофакторную аутентификацию
 															</MenuItem>
 														)}
 													</MenuList>
@@ -461,7 +462,7 @@ export default function Users() {
 										m="2% 0"
 									>
 										<Flex flex="1">
-											<Tooltip label="First Page">
+											<Tooltip label="Первая страница">
 												<IconButton
 													aria-label="icon button"
 													onClick={() =>
@@ -474,7 +475,7 @@ export default function Users() {
 													icon={<FaAngleDoubleLeft />}
 												/>
 											</Tooltip>
-											<Tooltip label="Previous Page">
+											<Tooltip label="Предыдущая страница">
 												<IconButton
 													aria-label="icon button"
 													onClick={() =>
@@ -493,17 +494,17 @@ export default function Users() {
 											alignItems="center"
 										>
 											<Text mr={8}>
-												Page{' '}
+												Страница{' '}
 												<Text fontWeight="bold" as="span">
 													{paginationProps.page}
 												</Text>{' '}
-												of{' '}
+												из{' '}
 												<Text fontWeight="bold" as="span">
 													{paginationProps.maxPages}
 												</Text>
 											</Text>
 											<Flex alignItems="center">
-												<Text flexShrink="0">Go to page:</Text>{' '}
+												<Text flexShrink="0">Перейти на страницу:</Text>{' '}
 												<NumberInput
 													ml={2}
 													mr={8}
@@ -536,13 +537,13 @@ export default function Users() {
 											>
 												{getLimits(paginationProps).map((pageSize) => (
 													<option key={pageSize} value={pageSize}>
-														Show {pageSize}
+														Показать {pageSize}
 													</option>
 												))}
 											</Select>
 										</Flex>
 										<Flex flex="1">
-											<Tooltip label="Next Page">
+											<Tooltip label="Следующая страница">
 												<IconButton
 													aria-label="icon button"
 													onClick={() =>
@@ -556,7 +557,7 @@ export default function Users() {
 													icon={<FaAngleRight />}
 												/>
 											</Tooltip>
-											<Tooltip label="Last Page">
+											<Tooltip label="Последняя страница">
 												<IconButton
 													aria-label="icon button"
 													onClick={() =>
@@ -593,7 +594,7 @@ export default function Users() {
 							fontWeight="bold"
 							color="#d9d9d9"
 						>
-							No Data
+							Нет данных
 						</Text>
 					</Flex>
 				)

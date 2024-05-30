@@ -25,7 +25,7 @@ const SecurityAdminSecret = ({
 		<div>
 			{' '}
 			<Text fontSize="md" paddingTop="2%" fontWeight="bold">
-				Security (Admin Secret)
+				Безопасность (Секретный ключ администратора)
 			</Text>
 			<Stack
 				spacing={6}
@@ -44,7 +44,7 @@ const SecurityAdminSecret = ({
 						justifyContent="start"
 						alignItems="center"
 					>
-						<Text fontSize="sm">Old Admin Secret:</Text>
+						<Text fontSize="sm">Старый секретный ключ администратора:</Text>
 					</Flex>
 					<Center
 						w={isNotSmallerScreen ? '70%' : '100%'}
@@ -54,7 +54,7 @@ const SecurityAdminSecret = ({
 							<Input
 								borderRadius={5}
 								size="sm"
-								placeholder="Enter Old Admin Secret"
+								placeholder="Введите старый секретный ключ администратора"
 								value={adminSecret.value as string}
 								onChange={(event: any) => validateAdminSecretHandler(event)}
 								type={
@@ -111,7 +111,7 @@ const SecurityAdminSecret = ({
 						justifyContent="start"
 						alignItems="center"
 					>
-						<Text fontSize="sm">New Admin Secret:</Text>
+						<Text fontSize="sm">Новый секретный ключ администратора:</Text>
 					</Flex>
 					<Center
 						w={isNotSmallerScreen ? '70%' : '100%'}
@@ -126,7 +126,7 @@ const SecurityAdminSecret = ({
 							fieldVisibility={fieldVisibility}
 							setFieldVisibility={setFieldVisibility}
 							isDisabled={adminSecret.disableInputField}
-							placeholder="Enter New Admin Secret"
+							placeholder="Введите новый секретный ключ администратора"
 						/>
 					</Center>
 				</Flex>

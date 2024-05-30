@@ -48,7 +48,7 @@ const InputField = ({
 	fieldVisibility,
 	setFieldVisibility,
 	availableRoles,
-	// This prop is added to improve the user experience for the boolean ENV variable having `DISABLE_` prefix, as those values need to be considered in inverted form.
+	// Этот параметр добавлен для улучшения пользовательского интерфейса для булевых переменных среды с префиксом `DISABLE_`, так как эти значения должны рассматриваться в перевернутом виде.
 	hasReversedValue,
 	...downshiftProps
 }: any) => {
@@ -233,7 +233,7 @@ const InputField = ({
 							type="text"
 							size="xs"
 							minW="150px"
-							placeholder="add a new value"
+							placeholder="добавить новое значение"
 							value={inputData[inputType] || ''}
 							onChange={(e: any) => {
 								setInputData({ ...inputData, [inputType]: e.target.value });
@@ -396,7 +396,7 @@ const InputField = ({
 		return (
 			<Flex w="25%" justifyContent="space-between">
 				<Text h="75%" fontWeight="bold" marginRight="2">
-					Off
+					Выкл
 				</Text>
 				<Switch
 					size="md"
@@ -411,7 +411,7 @@ const InputField = ({
 					}}
 				/>
 				<Text h="75%" fontWeight="bold" marginLeft="2">
-					On
+					Вкл
 				</Text>
 			</Flex>
 		);

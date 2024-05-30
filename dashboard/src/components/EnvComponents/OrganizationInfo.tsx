@@ -9,7 +9,7 @@ const OrganizationInfo = ({ variables, setVariables }: any) => {
 		<div>
 			{' '}
 			<Text fontSize="md" paddingTop="2%" fontWeight="bold" mb={5}>
-				Organization Information
+				Информация о организации
 			</Text>
 			<Stack spacing={6} padding="2% 0%">
 				<Flex direction={isNotSmallerScreen ? 'row' : 'column'}>
@@ -18,7 +18,7 @@ const OrganizationInfo = ({ variables, setVariables }: any) => {
 						justifyContent="start"
 						alignItems="center"
 					>
-						<Text fontSize="sm">Organization Name:</Text>
+						<Text fontSize="sm">Имя организации:</Text>
 					</Flex>
 					<Center
 						w={isNotSmallerScreen ? '70%' : '100%'}
@@ -38,7 +38,7 @@ const OrganizationInfo = ({ variables, setVariables }: any) => {
 						justifyContent="start"
 						alignItems="center"
 					>
-						<Text fontSize="sm">Organization Logo:</Text>
+						<Text fontSize="sm">Логотип организации:</Text>
 					</Flex>
 					<Center
 						w={isNotSmallerScreen ? '70%' : '100%'}

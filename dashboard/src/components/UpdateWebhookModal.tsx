@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import {
 	Button,
 	Center,
@@ -7,7 +7,6 @@ import {
 	Flex,
 	Input,
 	InputGroup,
-	InputRightElement,
 	MenuItem,
 	Modal,
 	ModalBody,
@@ -17,280 +16,156 @@ import {
 	ModalHeader,
 	ModalOverlay,
 	Select,
-	Switch,
 	Text,
 	useDisclosure,
 	useToast,
 	Alert,
 	AlertIcon,
-	Divider,
+	TableContainer,
+	Table,
+	Thead,
+	Tr,
+	Th,
+	Tbody,
+	Td,
+	Radio,
+	RadioGroup,
+	Stack,
+	Textarea,
+	Box,
 } from '@chakra-ui/react';
-import {
-	FaAngleDown,
-	FaAngleUp,
-	FaMinusCircle,
-	FaPlus,
-	FaRegClone,
-} from 'react-icons/fa';
+import { FaPlus, FaAngleDown, FaAngleUp } from 'react-icons/fa';
 import { useClient } from 'urql';
+import EmailEditor from 'react-email-editor';
 import {
-	webhookEventNames,
-	ArrayInputOperations,
-	WebhookInputDataFields,
-	WebhookInputHeaderFields,
 	UpdateModalViews,
-	webhookVerifiedStatus,
-	webhookPayloadExample,
+	EmailTemplateInputDataFields,
+	emailTemplateEventNames,
+	emailTemplateVariables,
+	EmailTemplateEditors,
 } from '../constants';
-import {
-	capitalizeFirstLetter,
-	copyTextToClipboard,
-	validateURI,
-} from '../utils';
-import { AddWebhook, EditWebhook, TestEndpoint } from '../graphql/mutation';
-import { BiCheckCircle, BiError, BiErrorCircle } from 'react-icons/bi';
+import { capitalizeFirstLetter } from '../utils';
+import { AddEmailTemplate, EditEmailTemplate } from '../graphql/mutation';
 
-interface headersDataType {
-	[WebhookInputHeaderFields.KEY]: string;
-	[WebhookInputHeaderFields.VALUE]: string;
+interface selectedEmailTemplateDataTypes {
+	[EmailTemplateInputDataFields.ID]: string;
+	[EmailTemplateInputDataFields.EVENT_NAME]: string;
+	[EmailTemplateInputDataFields.SUBJECT]: string;
+	[EmailTemplateInputDataFields.CREATED_AT]: number;
+	[EmailTemplateInputDataFields.TEMPLATE]: string;
+	[EmailTemplateInputDataFields.DESIGN]: string;
 }
 
-interface headersValidatorDataType {
-	[WebhookInputHeaderFields.KEY]: boolean;
-	[WebhookInputHeaderFields.VALUE]: boolean;
-}
-
-interface selecetdWebhookDataTypes {
-	[WebhookInputDataFields.ID]: string;
-	[WebhookInputDataFields.EVENT_NAME]: string;
-	[WebhookInputDataFields.EVENT_DESCRIPTION]?: string;
-	[WebhookInputDataFields.ENDPOINT]: string;
-	[WebhookInputDataFields.ENABLED]: boolean;
-	[WebhookInputDataFields.HEADERS]?: Record<string, string>;
-}
-
-interface UpdateWebhookModalInputPropTypes {
+interface UpdateEmailTemplateInputPropTypes {
 	view: UpdateModalViews;
-	selectedWebhook?: selecetdWebhookDataTypes;
-	fetchWebookData: Function;
+	selectedTemplate?: selectedEmailTemplateDataTypes;
+	fetchEmailTemplatesData: Function;
 }
 
-const initHeadersData: headersDataType = {
-	[WebhookInputHeaderFields.KEY]: '',
-	[WebhookInputHeaderFields.VALUE]: '',
-};
+interface templateVariableDataTypes {
+	text: string;
+	value: string;
+	description: string;
+}
 
-const initHeadersValidatorData: headersValidatorDataType = {
-	[WebhookInputHeaderFields.KEY]: true,
-	[WebhookInputHeaderFields.VALUE]: true,
-};
-
-interface webhookDataType {
-	[WebhookInputDataFields.EVENT_NAME]: string;
-	[WebhookInputDataFields.EVENT_DESCRIPTION]?: string;
-	[WebhookInputDataFields.ENDPOINT]: string;
-	[WebhookInputDataFields.ENABLED]: boolean;
-	[WebhookInputDataFields.HEADERS]: headersDataType[];
+interface emailTemplateDataType {
+	[EmailTemplateInputDataFields.EVENT_NAME]: string;
+	[EmailTemplateInputDataFields.SUBJECT]: string;
+	[EmailTemplateInputDataFields.TEMPLATE]: string;
+	[EmailTemplateInputDataFields.DESIGN]: string;
 }
 
 interface validatorDataType {
-	[WebhookInputDataFields.ENDPOINT]: boolean;
-	[WebhookInputDataFields.HEADERS]: headersValidatorDataType[];
+	[EmailTemplateInputDataFields.SUBJECT]: boolean;
 }
 
-const initWebhookData: webhookDataType = {
-	[WebhookInputDataFields.EVENT_NAME]: webhookEventNames['User login'],
-	[WebhookInputDataFields.EVENT_DESCRIPTION]: '',
-	[WebhookInputDataFields.ENDPOINT]: '',
-	[WebhookInputDataFields.ENABLED]: true,
-	[WebhookInputDataFields.HEADERS]: [{ ...initHeadersData }],
+const initTemplateData: emailTemplateDataType = {
+	[EmailTemplateInputDataFields.EVENT_NAME]: emailTemplateEventNames.Signup,
+	[EmailTemplateInputDataFields.SUBJECT]: '',
+	[EmailTemplateInputDataFields.TEMPLATE]: '',
+	[EmailTemplateInputDataFields.DESIGN]: '',
 };
 
-const initWebhookValidatorData: validatorDataType = {
-	[WebhookInputDataFields.ENDPOINT]: true,
-	[WebhookInputDataFields.HEADERS]: [{ ...initHeadersValidatorData }],
+const initTemplateValidatorData: validatorDataType = {
+	[EmailTemplateInputDataFields.SUBJECT]: true,
 };
 
-const UpdateWebhookModal = ({
+const UpdateEmailTemplate = ({
 	view,
-	selectedWebhook,
-	fetchWebookData,
-}: UpdateWebhookModalInputPropTypes) => {
+	selectedTemplate,
+	fetchEmailTemplatesData,
+}: UpdateEmailTemplateInputPropTypes) => {
 	const client = useClient();
 	const toast = useToast();
+	const emailEditorRef = useRef(null);
 	const { isOpen, onOpen, onClose } = useDisclosure();
 	const [loading, setLoading] = useState<boolean>(false);
-	const [verifyingEndpoint, setVerifyingEndpoint] = useState<boolean>(false);
-	const [isShowingPayload, setIsShowingPayload] = useState<boolean>(false);
-	const [webhook, setWebhook] = useState<webhookDataType>({
-		...initWebhookData,
+	const [editor, setEditor] = useState<string>(
+		EmailTemplateEditors.PLAIN_HTML_EDITOR,
+	);
+	const [templateVariables, setTemplateVariables] = useState<
+		templateVariableDataTypes[]
+	>([]);
+	const [templateData, setTemplateData] = useState<emailTemplateDataType>({
+		...initTemplateData,
 	});
 	const [validator, setValidator] = useState<validatorDataType>({
-		...initWebhookValidatorData,
+		...initTemplateValidatorData,
 	});
-	const [verifiedStatus, setVerifiedStatus] = useState<webhookVerifiedStatus>(
-		webhookVerifiedStatus.PENDING,
-	);
-	const inputChangehandler = (
-		inputType: string,
-		value: any,
-		headerInputType: string = WebhookInputHeaderFields.KEY,
-		headerIndex: number = 0,
-	) => {
-		if (
-			verifiedStatus !== webhookVerifiedStatus.PENDING &&
-			inputType !== WebhookInputDataFields.ENABLED
-		) {
-			setVerifiedStatus(webhookVerifiedStatus.PENDING);
-		}
-		switch (inputType) {
-			case WebhookInputDataFields.EVENT_NAME:
-				setWebhook({ ...webhook, [inputType]: value });
-				break;
-			case WebhookInputDataFields.EVENT_DESCRIPTION:
-				setWebhook({ ...webhook, [inputType]: value });
-				break;
-			case WebhookInputDataFields.ENDPOINT:
-				setWebhook({ ...webhook, [inputType]: value });
-				setValidator({
-					...validator,
-					[WebhookInputDataFields.ENDPOINT]: validateURI(value),
-				});
-				break;
-			case WebhookInputDataFields.ENABLED:
-				setWebhook({ ...webhook, [inputType]: value });
-				break;
-			case WebhookInputDataFields.HEADERS:
-				const updatedHeaders: any = [
-					...webhook[WebhookInputDataFields.HEADERS],
-				];
-				const updatedHeadersValidatorData: any = [
-					...validator[WebhookInputDataFields.HEADERS],
-				];
-				const otherHeaderInputType =
-					headerInputType === WebhookInputHeaderFields.KEY
-						? WebhookInputHeaderFields.VALUE
-						: WebhookInputHeaderFields.KEY;
-				updatedHeaders[headerIndex][headerInputType] = value;
-				updatedHeadersValidatorData[headerIndex][headerInputType] =
-					value.length > 0
-						? updatedHeaders[headerIndex][otherHeaderInputType].length > 0
-						: updatedHeaders[headerIndex][otherHeaderInputType].length === 0;
-				updatedHeadersValidatorData[headerIndex][otherHeaderInputType] =
-					value.length > 0
-						? updatedHeaders[headerIndex][otherHeaderInputType].length > 0
-						: updatedHeaders[headerIndex][otherHeaderInputType].length === 0;
-				setWebhook({ ...webhook, [inputType]: updatedHeaders });
-				setValidator({
-					...validator,
-					[inputType]: updatedHeadersValidatorData,
-				});
-				break;
-			default:
-				break;
+	const [isDynamicVariableInfoOpen, setIsDynamicVariableInfoOpen] =
+		useState<boolean>(false);
+
+	const onReady = () => {
+		if (selectedTemplate) {
+			const { design } = selectedTemplate;
+			try {
+				if (design) {
+					const designData = JSON.parse(design);
+					// @ts-ignore
+					emailEditorRef.current.editor.loadDesign(designData);
+				}
+			} catch (error) {
+				console.error(error);
+				onClose();
+			}
 		}
 	};
-	const updateHeaders = (operation: string, index: number = 0) => {
-		if (verifiedStatus !== webhookVerifiedStatus.PENDING) {
-			setVerifiedStatus(webhookVerifiedStatus.PENDING);
+
+	const inputChangehandler = (inputType: string, value: any) => {
+		if (inputType !== EmailTemplateInputDataFields.EVENT_NAME) {
+			setValidator({
+				...validator,
+				[inputType]: value?.trim().length,
+			});
 		}
-		switch (operation) {
-			case ArrayInputOperations.APPEND:
-				setWebhook({
-					...webhook,
-					[WebhookInputDataFields.HEADERS]: [
-						...(webhook?.[WebhookInputDataFields.HEADERS] || []),
-						{ ...initHeadersData },
-					],
-				});
-				setValidator({
-					...validator,
-					[WebhookInputDataFields.HEADERS]: [
-						...(validator?.[WebhookInputDataFields.HEADERS] || []),
-						{ ...initHeadersValidatorData },
-					],
-				});
-				break;
-			case ArrayInputOperations.REMOVE:
-				if (webhook?.[WebhookInputDataFields.HEADERS]?.length) {
-					const updatedHeaders = [...webhook[WebhookInputDataFields.HEADERS]];
-					updatedHeaders.splice(index, 1);
-					setWebhook({
-						...webhook,
-						[WebhookInputDataFields.HEADERS]: updatedHeaders,
-					});
-				}
-				if (validator?.[WebhookInputDataFields.HEADERS]?.length) {
-					const updatedHeadersData = [
-						...validator[WebhookInputDataFields.HEADERS],
-					];
-					updatedHeadersData.splice(index, 1);
-					setValidator({
-						...validator,
-						[WebhookInputDataFields.HEADERS]: updatedHeadersData,
-					});
-				}
-				break;
-			default:
-				break;
-		}
+		setTemplateData({ ...templateData, [inputType]: value });
 	};
+
 	const validateData = () => {
 		return (
 			!loading &&
-			!verifyingEndpoint &&
-			webhook[WebhookInputDataFields.EVENT_NAME].length > 0 &&
-			webhook[WebhookInputDataFields.ENDPOINT].length > 0 &&
-			validator[WebhookInputDataFields.ENDPOINT] &&
-			!validator[WebhookInputDataFields.HEADERS].some(
-				(headerData: headersValidatorDataType) =>
-					!headerData.key || !headerData.value,
-			)
+			templateData[EmailTemplateInputDataFields.EVENT_NAME].length > 0 &&
+			templateData[EmailTemplateInputDataFields.SUBJECT].length > 0 &&
+			validator[EmailTemplateInputDataFields.SUBJECT]
 		);
 	};
-	const getParams = () => {
-		let params: any = {
-			[WebhookInputDataFields.EVENT_NAME]:
-				webhook[WebhookInputDataFields.EVENT_NAME],
-			[WebhookInputDataFields.EVENT_DESCRIPTION]:
-				webhook[WebhookInputDataFields.EVENT_DESCRIPTION],
-			[WebhookInputDataFields.ENDPOINT]:
-				webhook[WebhookInputDataFields.ENDPOINT],
-			[WebhookInputDataFields.ENABLED]: webhook[WebhookInputDataFields.ENABLED],
-			[WebhookInputDataFields.HEADERS]: {},
-		};
-		if (webhook[WebhookInputDataFields.HEADERS].length) {
-			const headers = webhook[WebhookInputDataFields.HEADERS].reduce(
-				(acc, data) => {
-					return data.key ? { ...acc, [data.key]: data.value } : acc;
-				},
-				{},
-			);
-			if (Object.keys(headers).length) {
-				params[WebhookInputDataFields.HEADERS] = headers;
-			}
-		}
-		return params;
-	};
-	const saveData = async () => {
-		if (!validateData()) return;
-		setLoading(true);
-		const params = getParams();
+
+	const updateTemplate = async (params: emailTemplateDataType) => {
 		let res: any = {};
 		if (
 			view === UpdateModalViews.Edit &&
-			selectedWebhook?.[WebhookInputDataFields.ID]
+			selectedTemplate?.[EmailTemplateInputDataFields.ID]
 		) {
 			res = await client
-				.mutation(EditWebhook, {
+				.mutation(EditEmailTemplate, {
 					params: {
 						...params,
-						id: selectedWebhook[WebhookInputDataFields.ID],
+						id: selectedTemplate[EmailTemplateInputDataFields.ID],
 					},
 				})
 				.toPromise();
 		} else {
-			res = await client.mutation(AddWebhook, { params }).toPromise();
+			res = await client.mutation(AddEmailTemplate, { params }).toPromise();
 		}
 		setLoading(false);
 		if (res.error) {
@@ -300,75 +175,153 @@ const UpdateWebhookModal = ({
 				status: 'error',
 				position: 'top-right',
 			});
-		} else if (res.data?._add_webhook || res.data?._update_webhook) {
+		} else if (
+			res.data?._add_email_template ||
+			res.data?._update_email_template
+		) {
 			toast({
 				title: capitalizeFirstLetter(
-					res.data?._add_webhook?.message || res.data?._update_webhook?.message,
+					res.data?._add_email_template?.message ||
+						res.data?._update_email_template?.message,
 				),
 				isClosable: true,
 				status: 'success',
 				position: 'top-right',
 			});
-			setWebhook({
-				...initWebhookData,
-				[WebhookInputDataFields.HEADERS]: [{ ...initHeadersData }],
+			setTemplateData({
+				...initTemplateData,
 			});
-			setValidator({ ...initWebhookValidatorData });
-			fetchWebookData();
+			setValidator({ ...initTemplateValidatorData });
+			fetchEmailTemplatesData();
+		}
+	};
+
+	const saveData = async () => {
+		if (!validateData()) return;
+		setLoading(true);
+		let params: emailTemplateDataType = {
+			[EmailTemplateInputDataFields.EVENT_NAME]:
+				templateData[EmailTemplateInputDataFields.EVENT_NAME],
+			[EmailTemplateInputDataFields.SUBJECT]:
+				templateData[EmailTemplateInputDataFields.SUBJECT],
+			[EmailTemplateInputDataFields.TEMPLATE]:
+				templateData[EmailTemplateInputDataFields.TEMPLATE],
+			[EmailTemplateInputDataFields.DESIGN]: '',
+		};
+		if (editor === EmailTemplateEditors.UNLAYER_EDITOR) {
+			// @ts-ignore
+			await emailEditorRef.current.editor.exportHtml(async (data) => {
+				const { design, html } = data;
+				if (!html || !design) {
+					setLoading(false);
+					return;
+				}
+				params = {
+					...params,
+					[EmailTemplateInputDataFields.TEMPLATE]: html.trim(),
+					[EmailTemplateInputDataFields.DESIGN]: JSON.stringify(design),
+				};
+				await updateTemplate(params);
+			});
+		} else {
+			await updateTemplate(params);
 		}
 		view === UpdateModalViews.ADD && onClose();
 	};
+
+	const resetData = () => {
+		if (selectedTemplate) {
+			setTemplateData(selectedTemplate);
+		} else {
+			setTemplateData({ ...initTemplateData });
+		}
+	};
+
+	// set template data if edit modal is open
 	useEffect(() => {
 		if (
 			isOpen &&
 			view === UpdateModalViews.Edit &&
-			selectedWebhook &&
-			Object.keys(selectedWebhook || {}).length
+			selectedTemplate &&
+			Object.keys(selectedTemplate || {}).length
 		) {
-			const { headers, ...rest } = selectedWebhook;
-			const headerItems = Object.entries(headers || {});
-			if (headerItems.length) {
-				let formattedHeadersData = headerItems.map((headerData) => {
-					return {
-						[WebhookInputHeaderFields.KEY]: headerData[0],
-						[WebhookInputHeaderFields.VALUE]: headerData[1],
-					};
-				});
-				setWebhook({
-					...rest,
-					[WebhookInputDataFields.HEADERS]: formattedHeadersData,
-				});
-				setValidator({
-					...validator,
-					[WebhookInputDataFields.HEADERS]: new Array(
-						formattedHeadersData.length,
-					)
-						.fill({})
-						.map(() => ({ ...initHeadersValidatorData })),
+			const { id, created_at, ...rest } = selectedTemplate;
+			setTemplateData(rest);
+		}
+	}, [isOpen]);
+
+	// set template variables
+	useEffect(() => {
+		const updatedTemplateVariables = Object.entries(
+			emailTemplateVariables,
+		).reduce((acc, [key, val]): any => {
+			if (
+				(templateData[EmailTemplateInputDataFields.EVENT_NAME] !==
+					emailTemplateEventNames['Verify Otp'] &&
+					val === emailTemplateVariables.otp) ||
+				(templateData[EmailTemplateInputDataFields.EVENT_NAME] ===
+					emailTemplateEventNames['Verify Otp'] &&
+					val === emailTemplateVariables.verification_url)
+			) {
+				return acc;
+			}
+			return [
+				...acc,
+				{
+					text: key,
+					value: val.value,
+					description: val.description,
+				},
+			];
+		}, []);
+		setTemplateVariables(updatedTemplateVariables);
+	}, [templateData[EmailTemplateInputDataFields.EVENT_NAME]]);
+
+	// change editor
+	useEffect(() => {
+		if (isOpen && selectedTemplate) {
+			const { design } = selectedTemplate;
+			if (design) {
+				setEditor(EmailTemplateEditors.UNLAYER_EDITOR);
+			} else {
+				setEditor(EmailTemplateEditors.PLAIN_HTML_EDITOR);
+			}
+		}
+	}, [isOpen, selectedTemplate]);
+
+	// reset fields when editor is changed
+	useEffect(() => {
+		if (selectedTemplate?.design) {
+			if (editor === EmailTemplateEditors.UNLAYER_EDITOR) {
+				setTemplateData({
+					...templateData,
+					[EmailTemplateInputDataFields.TEMPLATE]: selectedTemplate.template,
+					[EmailTemplateInputDataFields.DESIGN]: selectedTemplate.design,
 				});
 			} else {
-				setWebhook({
-					...rest,
-					[WebhookInputDataFields.HEADERS]: [{ ...initHeadersData }],
+				setTemplateData({
+					...templateData,
+					[EmailTemplateInputDataFields.TEMPLATE]: '',
+					[EmailTemplateInputDataFields.DESIGN]: '',
+				});
+			}
+		} else if (selectedTemplate?.template) {
+			if (editor === EmailTemplateEditors.UNLAYER_EDITOR) {
+				setTemplateData({
+					...templateData,
+					[EmailTemplateInputDataFields.TEMPLATE]: '',
+					[EmailTemplateInputDataFields.DESIGN]: '',
+				});
+			} else {
+				setTemplateData({
+					...templateData,
+					[EmailTemplateInputDataFields.TEMPLATE]: selectedTemplate?.template,
+					[EmailTemplateInputDataFields.DESIGN]: '',
 				});
 			}
 		}
-	}, [isOpen]);
-	const verifyEndpoint = async () => {
-		if (!validateData()) return;
-		setVerifyingEndpoint(true);
-		const { [WebhookInputDataFields.ENABLED]: _, ...params } = getParams();
-		const res = await client.mutation(TestEndpoint, { params }).toPromise();
-		if (
-			res.data?._test_endpoint?.http_status >= 200 &&
-			res.data?._test_endpoint?.http_status < 400
-		) {
-			setVerifiedStatus(webhookVerifiedStatus.VERIFIED);
-		} else {
-			setVerifiedStatus(webhookVerifiedStatus.NOT_VERIFIED);
-		}
-		setVerifyingEndpoint(false);
-	};
+	}, [editor]);
+
 	return (
 		<>
 			{view === UpdateModalViews.ADD ? (
@@ -380,16 +333,25 @@ const UpdateWebhookModal = ({
 					isDisabled={false}
 					size="sm"
 				>
-					<Center h="100%">Add Webhook</Center>{' '}
+					<Center h="100%">Добавить шаблон</Center>{' '}
 				</Button>
 			) : (
-				<MenuItem onClick={onOpen}>Edit</MenuItem>
+				<MenuItem onClick={onOpen}>Редактировать</MenuItem>
 			)}
-			<Modal isOpen={isOpen} onClose={onClose} size="3xl">
+			<Modal
+				isOpen={isOpen}
+				onClose={() => {
+					resetData();
+					onClose();
+				}}
+				size="6xl"
+			>
 				<ModalOverlay />
 				<ModalContent>
 					<ModalHeader>
-						{view === UpdateModalViews.ADD ? 'Add New Webhook' : 'Edit Webhook'}
+						{view === UpdateModalViews.ADD
+							? 'Добавить новый шаблон электронной почты'
+							: 'Редактировать шаблон электронной почты'}
 					</ModalHeader>
 					<ModalCloseButton />
 					<ModalBody>
@@ -400,27 +362,94 @@ const UpdateWebhookModal = ({
 							borderColor="gray.200"
 							p="5"
 						>
+							<Alert
+								status="info"
+								onClick={() =>
+									setIsDynamicVariableInfoOpen(!isDynamicVariableInfoOpen)
+								}
+								borderRadius="5"
+								marginBottom={5}
+								cursor="pointer"
+								fontSize="sm"
+							>
+								<AlertIcon />
+								<Flex
+									width="100%"
+									justifyContent="space-between"
+									alignItems="center"
+								>
+									<Box width="85%">
+										<b>Примечание:</b> Вы можете добавить набор динамических
+										переменных в тему и текст письма. Нажмите здесь, чтобы
+										посмотреть набор динамических переменных.
+									</Box>
+									{isDynamicVariableInfoOpen ? <FaAngleUp /> : <FaAngleDown />}
+								</Flex>
+							</Alert>
+							<Collapse
+								style={{
+									width: '100%',
+								}}
+								in={isDynamicVariableInfoOpen}
+							>
+								<TableContainer
+									background="gray.100"
+									borderRadius={5}
+									height={200}
+									width="100%"
+									overflowY="auto"
+									overflowWrap="break-word"
+								>
+									<Table variant="simple">
+										<Thead>
+											<Tr>
+												<Th>Переменная</Th>
+												<Th>Описание</Th>
+											</Tr>
+										</Thead>
+										<Tbody>
+											{templateVariables.map((i) => (
+												<Tr key={i.text}>
+													<Td>
+														<Code fontSize="sm">{`{{.${i.text}}}`}</Code>
+													</Td>
+													<Td>
+														<Text
+															size="sm"
+															fontSize="sm"
+															overflowWrap="break-word"
+															width="100%"
+														>
+															{i.description}
+														</Text>
+													</Td>
+												</Tr>
+											))}
+										</Tbody>
+									</Table>
+								</TableContainer>
+							</Collapse>
 							<Flex
 								width="100%"
 								justifyContent="space-between"
 								alignItems="center"
 								marginBottom="2%"
 							>
-								<Flex flex="1">Event Name</Flex>
+								<Flex flex="1">Название события</Flex>
 								<Flex flex="3">
 									<Select
 										size="md"
 										value={
-											webhook[WebhookInputDataFields.EVENT_NAME].split('-')[0]
+											templateData[EmailTemplateInputDataFields.EVENT_NAME]
 										}
 										onChange={(e) =>
 											inputChangehandler(
-												WebhookInputDataFields.EVENT_NAME,
+												EmailTemplateInputDataFields.EVENT_NAME,
 												e.currentTarget.value,
 											)
 										}
 									>
-										{Object.entries(webhookEventNames).map(
+										{Object.entries(emailTemplateEventNames).map(
 											([key, value]: any) => (
 												<option value={value} key={key}>
 													{key}
@@ -434,19 +463,22 @@ const UpdateWebhookModal = ({
 								width="100%"
 								justifyContent="start"
 								alignItems="center"
-								marginBottom="5%"
+								marginBottom="2%"
 							>
-								<Flex flex="1">Event Description</Flex>
+								<Flex flex="1">Тема</Flex>
 								<Flex flex="3">
 									<InputGroup size="md">
 										<Input
 											pr="4.5rem"
 											type="text"
-											placeholder="User event"
-											value={webhook[WebhookInputDataFields.EVENT_DESCRIPTION]}
+											placeholder="Тема письма"
+											value={templateData[EmailTemplateInputDataFields.SUBJECT]}
+											isInvalid={
+												!validator[EmailTemplateInputDataFields.SUBJECT]
+											}
 											onChange={(e) =>
 												inputChangehandler(
-													WebhookInputDataFields.EVENT_DESCRIPTION,
+													EmailTemplateInputDataFields.SUBJECT,
 													e.currentTarget.value,
 												)
 											}
@@ -456,235 +488,71 @@ const UpdateWebhookModal = ({
 							</Flex>
 							<Flex
 								width="100%"
-								justifyContent="start"
+								justifyContent="flex-start"
 								alignItems="center"
-								marginBottom="5%"
+								marginBottom="2%"
 							>
-								<Flex flex="1">Endpoint</Flex>
+								<Flex flex="1">Тело шаблона</Flex>
 								<Flex flex="3">
-									<InputGroup size="md">
-										<Input
-											pr="4.5rem"
-											type="text"
-											placeholder="https://domain.com/webhook"
-											value={webhook[WebhookInputDataFields.ENDPOINT]}
-											isInvalid={!validator[WebhookInputDataFields.ENDPOINT]}
-											onChange={(e) =>
-												inputChangehandler(
-													WebhookInputDataFields.ENDPOINT,
-													e.currentTarget.value,
-												)
-											}
-										/>
-									</InputGroup>
-								</Flex>
-							</Flex>
-							<Flex
-								width="100%"
-								justifyContent="space-between"
-								alignItems="center"
-								marginBottom="5%"
-							>
-								<Flex flex="1">Enabled</Flex>
-								<Flex w="25%" justifyContent="space-between">
-									<Text h="75%" fontWeight="bold" marginRight="2">
-										Off
-									</Text>
-									<Switch
-										size="md"
-										isChecked={webhook[WebhookInputDataFields.ENABLED]}
-										onChange={() =>
-											inputChangehandler(
-												WebhookInputDataFields.ENABLED,
-												!webhook[WebhookInputDataFields.ENABLED],
-											)
-										}
-									/>
-									<Text h="75%" fontWeight="bold" marginLeft="2">
-										On
-									</Text>
-								</Flex>
-							</Flex>
-
-							<Flex
-								width="100%"
-								justifyContent="space-between"
-								alignItems="center"
-								marginBottom="5%"
-							>
-								<Flex>Headers</Flex>
-								<Flex>
-									<Button
-										leftIcon={<FaPlus />}
-										colorScheme="blue"
-										h="1.75rem"
-										size="sm"
-										variant="ghost"
-										paddingRight="0"
-										onClick={() => updateHeaders(ArrayInputOperations.APPEND)}
+									<RadioGroup
+										onChange={(value) => setEditor(value)}
+										value={editor}
 									>
-										Add more Headers
-									</Button>
+										<Stack direction="row" spacing="50px">
+											<Radio value={EmailTemplateEditors.PLAIN_HTML_EDITOR}>
+												Простой HTML
+											</Radio>
+											<Radio value={EmailTemplateEditors.UNLAYER_EDITOR}>
+												Редактор Unlayer
+											</Radio>
+										</Stack>
+									</RadioGroup>
 								</Flex>
 							</Flex>
-
-							<Flex flexDirection="column" maxH={220} overflowY="auto">
-								{webhook[WebhookInputDataFields.HEADERS]?.map(
-									(headerData, index) => (
-										<Flex
-											key={`header-data-${index}`}
-											justifyContent="center"
-											alignItems="center"
-										>
-											<InputGroup size="md" marginBottom="2.5%">
-												<Input
-													type="text"
-													placeholder="key"
-													value={headerData[WebhookInputHeaderFields.KEY]}
-													isInvalid={
-														!validator[WebhookInputDataFields.HEADERS][index]?.[
-															WebhookInputHeaderFields.KEY
-														]
-													}
-													onChange={(e) =>
-														inputChangehandler(
-															WebhookInputDataFields.HEADERS,
-															e.target.value,
-															WebhookInputHeaderFields.KEY,
-															index,
-														)
-													}
-													width="30%"
-													marginRight="2%"
-												/>
-												<Center marginRight="2%">
-													<Text fontWeight="bold">:</Text>
-												</Center>
-												<Input
-													type="text"
-													placeholder="value"
-													value={headerData[WebhookInputHeaderFields.VALUE]}
-													isInvalid={
-														!validator[WebhookInputDataFields.HEADERS][index]?.[
-															WebhookInputHeaderFields.VALUE
-														]
-													}
-													onChange={(e) =>
-														inputChangehandler(
-															WebhookInputDataFields.HEADERS,
-															e.target.value,
-															WebhookInputHeaderFields.VALUE,
-															index,
-														)
-													}
-													width="65%"
-												/>
-												<InputRightElement width="3rem">
-													<Button
-														width="6rem"
-														colorScheme="blackAlpha"
-														variant="ghost"
-														padding="0"
-														onClick={() =>
-															updateHeaders(ArrayInputOperations.REMOVE, index)
-														}
-													>
-														<FaMinusCircle />
-													</Button>
-												</InputRightElement>
-											</InputGroup>
-										</Flex>
-									),
+							<Flex
+								width="100%"
+								justifyContent="flex-start"
+								alignItems="center"
+								border="1px solid"
+								borderColor="gray.200"
+							>
+								{editor === EmailTemplateEditors.UNLAYER_EDITOR ? (
+									<EmailEditor ref={emailEditorRef} onReady={onReady} />
+								) : (
+									<Textarea
+										value={templateData.template}
+										onChange={(e) => {
+											setTemplateData({
+												...templateData,
+												[EmailTemplateInputDataFields.TEMPLATE]: e.target.value,
+											});
+										}}
+										placeholder="HTML-код шаблона"
+										border="0"
+										height="500px"
+									/>
 								)}
 							</Flex>
-							<Divider marginY={5} />
-
-							<Alert
-								status="info"
-								onClick={() => setIsShowingPayload(!isShowingPayload)}
-								borderRadius="5"
-								cursor="pointer"
-								fontSize="sm"
-							>
-								<AlertIcon />
-								<Flex
-									width="100%"
-									justifyContent="space-between"
-									alignItems="center"
-								>
-									Checkout the example payload
-									{isShowingPayload ? <FaAngleUp /> : <FaAngleDown />}
-								</Flex>
-							</Alert>
-							<Collapse
-								style={{
-									marginTop: 10,
-									width: '100%',
-								}}
-								in={isShowingPayload}
-							>
-								<Code
-									width="inherit"
-									borderRadius={5}
-									padding={2}
-									position="relative"
-								>
-									<pre style={{ overflow: 'auto' }}>
-										{webhookPayloadExample}
-									</pre>
-									{isShowingPayload && (
-										<Flex
-											position="absolute"
-											top={4}
-											right={4}
-											cursor="pointer"
-											onClick={() => copyTextToClipboard(webhookPayloadExample)}
-										>
-											<FaRegClone color="#bfbfbf" />
-										</Flex>
-									)}
-								</Code>
-							</Collapse>
 						</Flex>
 					</ModalBody>
 					<ModalFooter>
 						<Button
-							colorScheme={
-								verifiedStatus === webhookVerifiedStatus.VERIFIED
-									? 'green'
-									: verifiedStatus === webhookVerifiedStatus.PENDING
-									? 'yellow'
-									: 'red'
-							}
 							variant="outline"
-							onClick={verifyEndpoint}
-							isLoading={verifyingEndpoint}
-							isDisabled={!validateData()}
+							onClick={resetData}
+							isDisabled={loading}
 							marginRight="5"
-							leftIcon={
-								verifiedStatus === webhookVerifiedStatus.VERIFIED ? (
-									<BiCheckCircle />
-								) : verifiedStatus === webhookVerifiedStatus.PENDING ? (
-									<BiErrorCircle />
-								) : (
-									<BiError />
-								)
-							}
 						>
-							{verifiedStatus === webhookVerifiedStatus.VERIFIED
-								? 'Endpoint Verified'
-								: verifiedStatus === webhookVerifiedStatus.PENDING
-								? 'Test Endpoint'
-								: 'Endpoint Not Verified'}
+							Сбросить
 						</Button>
 						<Button
 							colorScheme="blue"
 							variant="solid"
+							isLoading={loading}
 							onClick={saveData}
 							isDisabled={!validateData()}
 						>
 							<Center h="100%" pt="5%">
-								Save
+								Сохранить
 							</Center>
 						</Button>
 					</ModalFooter>
@@ -694,4 +562,4 @@ const UpdateWebhookModal = ({
 	);
 };
 
-export default UpdateWebhookModal;
+export default UpdateEmailTemplate;

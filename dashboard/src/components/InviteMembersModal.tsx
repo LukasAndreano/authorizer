@@ -98,11 +98,11 @@ const InviteMembersModal = ({
 					})
 					.toPromise();
 				if (res.error) {
-					throw new Error('Internal server error');
+					throw new Error('Ошибка сервера');
 					return;
 				}
 				toast({
-					title: 'Invites sent successfully!',
+					title: 'Приглашения успешно отправлены!',
 					isClosable: true,
 					status: 'success',
 					position: 'top-right',
@@ -110,11 +110,11 @@ const InviteMembersModal = ({
 				setLoading(false);
 				updateUserList();
 			} else {
-				throw new Error('Please add emails');
+				throw new Error('Пожалуйста, добавьте адреса электронной почты');
 			}
 		} catch (error: any) {
 			toast({
-				title: error?.message || 'Error occurred, try again!',
+				title: error?.message || 'Произошла ошибка, попробуйте снова!',
 				isClosable: true,
 				status: 'error',
 				position: 'top-right',
@@ -195,19 +195,19 @@ const InviteMembersModal = ({
 							hasArrow
 							bg="gray.300"
 							color="black"
-							label="Email verification is disabled, refer to 'Features' tab within 'Environment' to enable it."
+							label="Подтверждение электронной почты отключено, перейдите на вкладку 'Функции' в разделе 'Настройки', чтобы включить его."
 						>
-							Invite Members
+							Пригласить пользователей
 						</Tooltip>
 					) : (
-						'Invite Members'
+						'Пригласить пользователей'
 					)}
 				</Center>{' '}
 			</Button>
 			<Modal isOpen={isOpen} onClose={closeModalHandler} size="xl">
 				<ModalOverlay />
 				<ModalContent>
-					<ModalHeader>Invite Members</ModalHeader>
+					<ModalHeader>Пригласить пользователей</ModalHeader>
 					<ModalCloseButton />
 					<ModalBody>
 						<Tabs
@@ -217,8 +217,8 @@ const InviteMembersModal = ({
 							onChange={changeTabsHandler}
 						>
 							<TabList>
-								<Tab>Enter emails</Tab>
-								<Tab>Upload CSV</Tab>
+								<Tab>Ввести адреса электронной почты</Tab>
+								<Tab>Загрузить CSV</Tab>
 							</TabList>
 							<TabPanels
 								border="1px"
@@ -261,7 +261,7 @@ const InviteMembersModal = ({
 											alignItems="center"
 											marginBottom="2%"
 										>
-											<Flex marginLeft="2.5%">Emails</Flex>
+											<Flex marginLeft="2.5%">Адреса электронной почты</Flex>
 											<Flex>
 												<Button
 													leftIcon={<FaPlus />}
@@ -273,7 +273,7 @@ const InviteMembersModal = ({
 														updateEmailListHandler(ArrayInputOperations.APPEND)
 													}
 												>
-													Add more emails
+													Добавить еще адреса электронной почты
 												</Button>
 											</Flex>
 										</Flex>
@@ -331,7 +331,7 @@ const InviteMembersModal = ({
 									>
 										<input {...getInputProps()} />
 										{isDragActive ? (
-											<Text>Drop the files here...</Text>
+											<Text>Перетащите файлы сюда...</Text>
 										) : (
 											<Flex
 												flexDirection="column"
@@ -342,10 +342,10 @@ const InviteMembersModal = ({
 													<FaUpload fontSize="40" />
 												</Center>
 												<Text>
-													Drag 'n' drop the csv file here, or click to select.
+													Перетащите файл CSV сюда или нажмите, чтобы выбрать.
 												</Text>
 												<Text size="xs">
-													Download{' '}
+													Скачать{' '}
 													<Link
 														href={`/dashboard/public/sample.csv`}
 														download="sample.csv"
@@ -355,7 +355,7 @@ const InviteMembersModal = ({
 														{' '}
 														sample.csv
 													</Link>{' '}
-													and modify it.{' '}
+													и изменить его.{' '}
 												</Text>
 											</Flex>
 										)}
@@ -372,7 +372,7 @@ const InviteMembersModal = ({
 							isDisabled={disableSendButton || loading}
 						>
 							<Center h="100%" pt="5%">
-								Send
+								Отправить
 							</Center>
 						</Button>
 					</ModalFooter>

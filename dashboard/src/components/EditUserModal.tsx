@@ -31,8 +31,8 @@ import { GetAvailableRolesQuery } from '../graphql/queries';
 
 const GenderTypes = {
 	Undisclosed: null,
-	Male: 'Male',
-	Female: 'Female',
+	Male: 'Мужской',
+	Female: 'Женский',
 };
 
 interface userDataTypes {
@@ -101,14 +101,14 @@ const EditUserModal = ({
 			.toPromise();
 		if (res.error) {
 			toast({
-				title: 'User data update failed',
+				title: 'Произошла ошибка при обновлении данных пользователя',
 				isClosable: true,
 				status: 'error',
 				position: 'top-right',
 			});
 		} else if (res.data?._update_user?.id) {
 			toast({
-				title: 'User data update successful',
+				title: 'Данные пользователя обновлены успешно',
 				isClosable: true,
 				status: 'success',
 				position: 'top-right',
@@ -119,17 +119,17 @@ const EditUserModal = ({
 	};
 	return (
 		<>
-			<MenuItem onClick={onOpen}>Edit User Details</MenuItem>
+			<MenuItem onClick={onOpen}>Редактировать данные пользователя</MenuItem>
 			<Modal isOpen={isOpen} onClose={onClose}>
 				<ModalOverlay />
 				<ModalContent>
-					<ModalHeader>Edit User Details</ModalHeader>
+					<ModalHeader>Редактировать данные пользователя</ModalHeader>
 					<ModalCloseButton />
 					<ModalBody>
 						<Stack>
 							<Flex>
 								<Flex w="30%" justifyContent="start" alignItems="center">
-									<Text fontSize="sm">Given Name:</Text>
+									<Text fontSize="sm">Имя:</Text>
 								</Flex>
 								<Center w="70%">
 									<InputField
@@ -141,7 +141,7 @@ const EditUserModal = ({
 							</Flex>
 							<Flex>
 								<Flex w="30%" justifyContent="start" alignItems="center">
-									<Text fontSize="sm">Middle Name:</Text>
+									<Text fontSize="sm">Отчество:</Text>
 								</Flex>
 								<Center w="70%">
 									<InputField
@@ -153,7 +153,7 @@ const EditUserModal = ({
 							</Flex>
 							<Flex>
 								<Flex w="30%" justifyContent="start" alignItems="center">
-									<Text fontSize="sm">Family Name:</Text>
+									<Text fontSize="sm">Фамилия:</Text>
 								</Flex>
 								<Center w="70%">
 									<InputField
@@ -165,7 +165,7 @@ const EditUserModal = ({
 							</Flex>
 							<Flex>
 								<Flex w="30%" justifyContent="start" alignItems="center">
-									<Text fontSize="sm">Birth Date:</Text>
+									<Text fontSize="sm">Дата рождения:</Text>
 								</Flex>
 								<Center w="70%">
 									<InputField
@@ -177,7 +177,7 @@ const EditUserModal = ({
 							</Flex>
 							<Flex>
 								<Flex w="30%" justifyContent="start" alignItems="center">
-									<Text fontSize="sm">Nickname:</Text>
+									<Text fontSize="sm">Никнейм:</Text>
 								</Flex>
 								<Center w="70%">
 									<InputField
@@ -189,7 +189,7 @@ const EditUserModal = ({
 							</Flex>
 							<Flex>
 								<Flex w="30%" justifyContent="start" alignItems="center">
-									<Text fontSize="sm">Gender:</Text>
+									<Text fontSize="sm">Пол:</Text>
 								</Flex>
 								<Center w="70%">
 									<InputField
@@ -203,7 +203,7 @@ const EditUserModal = ({
 							</Flex>
 							<Flex>
 								<Flex w="30%" justifyContent="start" alignItems="center">
-									<Text fontSize="sm">Phone Number:</Text>
+									<Text fontSize="sm">Номер телефона:</Text>
 								</Flex>
 								<Center w="70%">
 									<InputField
@@ -215,7 +215,7 @@ const EditUserModal = ({
 							</Flex>
 							<Flex>
 								<Flex w="30%" justifyContent="start" alignItems="center">
-									<Text fontSize="sm">Picture:</Text>
+									<Text fontSize="sm">Изображение:</Text>
 								</Flex>
 								<Center w="70%">
 									<InputField
@@ -227,7 +227,7 @@ const EditUserModal = ({
 							</Flex>
 							<Flex>
 								<Flex w="30%" justifyContent="start" alignItems="center">
-									<Text fontSize="sm">Roles:</Text>
+									<Text fontSize="sm">Роли:</Text>
 								</Flex>
 								<Center w="70%">
 									<InputField
@@ -250,7 +250,7 @@ const EditUserModal = ({
 							isDisabled={false}
 						>
 							<Center h="100%" pt="5%">
-								Save
+								Сохранить
 							</Center>
 						</Button>
 					</ModalFooter>

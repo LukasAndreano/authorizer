@@ -70,7 +70,7 @@ const GenerateKeysModal = ({ jwtType, getData }: propTypes) => {
 				.toPromise();
 			if (res?.error) {
 				toast({
-					title: 'Error occurred generating jwt keys',
+					title: 'Возникла ошибка при создании JWT ключей',
 					isClosable: true,
 					status: 'error',
 					position: 'top-right',
@@ -104,7 +104,7 @@ const GenerateKeysModal = ({ jwtType, getData }: propTypes) => {
 
 		if (res.error) {
 			toast({
-				title: 'Error occurred setting jwt keys',
+				title: 'Возникла ошибка при обновлении JWT ключей',
 				isClosable: true,
 				status: 'error',
 				position: 'top-right',
@@ -113,7 +113,7 @@ const GenerateKeysModal = ({ jwtType, getData }: propTypes) => {
 			return;
 		}
 		toast({
-			title: 'JWT keys updated successfully',
+			title: 'JWT ключи успешно обновлены',
 			isClosable: true,
 			status: 'success',
 			position: 'top-right',
@@ -136,7 +136,7 @@ const GenerateKeysModal = ({ jwtType, getData }: propTypes) => {
 				variant="ghost"
 				onClick={onOpen}
 			>
-				Generate new keys
+				Сгенерировать новые ключи
 			</Button>
 			<Modal isOpen={isOpen} onClose={closeHandler}>
 				<ModalOverlay />
@@ -146,7 +146,7 @@ const GenerateKeysModal = ({ jwtType, getData }: propTypes) => {
 					<ModalBody>
 						<Flex>
 							<Flex w="30%" justifyContent="start" alignItems="center">
-								<Text fontSize="sm">JWT Type:</Text>
+								<Text fontSize="sm">JWT тип:</Text>
 							</Flex>
 							<InputField
 								variables={stateVariables}
@@ -171,7 +171,7 @@ const GenerateKeysModal = ({ jwtType, getData }: propTypes) => {
 								) ? (
 									<Flex marginTop="8">
 										<Flex w="23%" justifyContent="start" alignItems="center">
-											<Text fontSize="sm">JWT Secret</Text>
+											<Text fontSize="sm">Секретный JWT ключ</Text>
 										</Flex>
 										<Center w="77%">
 											<Input
@@ -191,14 +191,14 @@ const GenerateKeysModal = ({ jwtType, getData }: propTypes) => {
 									<>
 										<Flex marginTop="8">
 											<Flex w="23%" justifyContent="start" alignItems="center">
-												<Text fontSize="sm">Public Key</Text>
+												<Text fontSize="sm">Публичный ключ</Text>
 											</Flex>
 											<Center w="77%">
 												<InputField
 													variables={stateVariables}
 													setVariables={setStateVariables}
 													inputType={TextAreaInputType.JWT_PUBLIC_KEY}
-													placeholder="Add public key here"
+													placeholder="Добавьте публичный ключ здесь"
 													minH="25vh"
 													readOnly
 												/>
@@ -206,14 +206,14 @@ const GenerateKeysModal = ({ jwtType, getData }: propTypes) => {
 										</Flex>
 										<Flex marginTop="8">
 											<Flex w="23%" justifyContent="start" alignItems="center">
-												<Text fontSize="sm">Private Key</Text>
+												<Text fontSize="sm">Приватный ключ</Text>
 											</Flex>
 											<Center w="77%">
 												<InputField
 													variables={stateVariables}
 													setVariables={setStateVariables}
 													inputType={TextAreaInputType.JWT_PRIVATE_KEY}
-													placeholder="Add private key here"
+													placeholder="Добавьте приватный ключ здесь"
 													minH="25vh"
 													readOnly
 												/>
@@ -234,7 +234,7 @@ const GenerateKeysModal = ({ jwtType, getData }: propTypes) => {
 							isDisabled={isLoading}
 						>
 							<Center h="100%" pt="5%">
-								Apply
+								Применить
 							</Center>
 						</Button>
 					</ModalFooter>

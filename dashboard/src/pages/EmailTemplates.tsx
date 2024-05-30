@@ -124,7 +124,7 @@ const EmailTemplates = () => {
 		<Box m="5" py="5" px="10" bg="white" rounded="md">
 			<Flex margin="2% 0" justifyContent="space-between" alignItems="center">
 				<Text fontSize="md" fontWeight="bold">
-					Email Templates
+					Шаблоны писем
 				</Text>
 				<UpdateEmailTemplateModal
 					view={UpdateModalViews.ADD}
@@ -136,10 +136,10 @@ const EmailTemplates = () => {
 					<Table variant="simple">
 						<Thead>
 							<Tr>
-								<Th>Event Name</Th>
-								<Th>Subject</Th>
-								<Th>Created At</Th>
-								<Th>Actions</Th>
+								<Th>Название события</Th>
+								<Th>Тема</Th>
+								<Th>Создано</Th>
+								<Th>Действия</Th>
 							</Tr>
 						</Thead>
 						<Tbody>
@@ -165,7 +165,7 @@ const EmailTemplates = () => {
 													alignItems="center"
 												>
 													<Text fontSize="sm" fontWeight="light">
-														Menu
+														Меню
 													</Text>
 													<FaAngleDown style={{ marginLeft: 10 }} />
 												</Flex>
@@ -201,7 +201,7 @@ const EmailTemplates = () => {
 									m="2% 0"
 								>
 									<Flex flex="1">
-										<Tooltip label="First Page">
+										<Tooltip label="Первая страница">
 											<IconButton
 												aria-label="icon button"
 												onClick={() =>
@@ -214,7 +214,7 @@ const EmailTemplates = () => {
 												icon={<FaAngleDoubleLeft />}
 											/>
 										</Tooltip>
-										<Tooltip label="Previous Page">
+										<Tooltip label="Прошлая страница">
 											<IconButton
 												aria-label="icon button"
 												onClick={() =>
@@ -276,13 +276,13 @@ const EmailTemplates = () => {
 										>
 											{pageLimits.map((pageSize) => (
 												<option key={pageSize} value={pageSize}>
-													Show {pageSize}
+													Показать {pageSize}
 												</option>
 											))}
 										</Select>
 									</Flex>
 									<Flex flex="1">
-										<Tooltip label="Next Page">
+										<Tooltip label="Следующая страница">
 											<IconButton
 												aria-label="icon button"
 												onClick={() =>
@@ -296,7 +296,7 @@ const EmailTemplates = () => {
 												icon={<FaAngleRight />}
 											/>
 										</Tooltip>
-										<Tooltip label="Last Page">
+										<Tooltip label="Последняя страница">
 											<IconButton
 												aria-label="icon button"
 												onClick={() =>
@@ -332,7 +332,7 @@ const EmailTemplates = () => {
 							fontWeight="bold"
 							color="#d9d9d9"
 						>
-							No Data
+							Нет данных
 						</Text>
 					</Flex>
 				)

@@ -72,53 +72,55 @@ export default function Auth() {
 				fontWeight="bold"
 				mb="2"
 			>
-				Hello Admin 👋 <br />
+				Привет, администратор 👋 <br />
 			</Text>
 			<Text fontSize="large" textAlign="center" color="gray.500" mb="8">
-				Welcome to Admin Dashboard
+				Добро пожаловать в админку
 			</Text>
 			<form onSubmit={handleSubmit}>
 				<VStack spacing="5" justify="space-between">
 					<FormControl isRequired>
-						<FormLabel htmlFor="admin-username">Username</FormLabel>
+						<FormLabel htmlFor="admin-username">Имя пользователя</FormLabel>
 						<Input
 							size="lg"
 							id="admin-username"
-							placeholder="Username"
+							placeholder="admin"
 							disabled
 							value="admin"
 						/>
 					</FormControl>
 					<FormControl isRequired>
-						<FormLabel htmlFor="admin-secret">Password</FormLabel>
+						<FormLabel htmlFor="admin-secret">Пароль</FormLabel>
 						<Input
 							size="lg"
 							id="admin-secret"
-							placeholder="Admin secret"
+							placeholder="Введите пароль"
 							type="password"
 							minLength={!isLogin ? 6 : 1}
 						/>
 					</FormControl>
 					<Button
 						isLoading={signUpResult.fetching || loginResult.fetching}
-						loadingText="Submitting"
+						loadingText="Загружаем"
 						colorScheme="blue"
 						size="lg"
 						w="100%"
 						type="submit"
 					>
-						{isLogin ? 'Login' : 'Sign up'}
+						{isLogin ? 'Войти' : 'Создать аккаунт'}
 					</Button>
 					{isLogin ? (
 						<Text color="gray.600" fontSize="sm">
-							<b>Note:</b> In case if you have forgot your admin secret, you can
-							reset it by updating <code>ADMIN_SECRET</code> environment
-							variable. For more information, please refer to the{' '}
-							<a href="https://docs.authorizer.dev/core/env/">documentation</a>.
+							<b>Примечание:</b> Если вы забыли ваш пароль администратора, вы
+							можете сбросить его, обновив переменную окружения{' '}
+							<code>ADMIN_SECRET</code>. Для получения дополнительной
+							информации, пожалуйста, обратитесь к{' '}
+							<a href="https://docs.authorizer.dev/core/env/">документации</a>.
 						</Text>
 					) : (
 						<Text color="gray.600" fontSize="sm">
-							<b>Note:</b> Configure the password to start using your dashboard.
+							<b>Примечание:</b> Настройте пароль, чтобы начать использовать
+							панель управления.
 						</Text>
 					)}
 				</VStack>

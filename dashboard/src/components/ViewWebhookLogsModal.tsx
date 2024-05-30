@@ -129,11 +129,11 @@ const ViewWebhookLogsModal = ({
 	}, [isOpen, paginationProps.page, paginationProps.limit]);
 	return (
 		<>
-			<MenuItem onClick={onOpen}>View Logs</MenuItem>
+			<MenuItem onClick={onOpen}>Просмотреть логи</MenuItem>
 			<Modal isOpen={isOpen} onClose={onClose} size="4xl">
 				<ModalOverlay />
 				<ModalContent>
-					<ModalHeader>Webhook Logs - {eventName}</ModalHeader>
+					<ModalHeader>Логи вебхуков - {eventName}</ModalHeader>
 					<ModalCloseButton />
 					<ModalBody>
 						<Flex
@@ -149,10 +149,10 @@ const ViewWebhookLogsModal = ({
 										<Thead>
 											<Tr>
 												<Th>ID</Th>
-												<Th>Created At</Th>
-												<Th>Http Status</Th>
-												<Th>Request</Th>
-												<Th>Response</Th>
+												<Th>Создано</Th>
+												<Th>HTTP-статус</Th>
+												<Th>Запрос</Th>
+												<Th>Ответ</Th>
 											</Tr>
 										</Thead>
 										<Tbody>
@@ -197,7 +197,9 @@ const ViewWebhookLogsModal = ({
 																		logData.request ? 'gray' : 'yellow'
 																	}
 																>
-																	{logData.request ? 'Payload' : 'No Data'}
+																	{logData.request
+																		? 'Полезная нагрузка'
+																		: 'Нет данных'}
 																</Tag>
 															</Tooltip>
 															{logData.request && (
@@ -229,7 +231,7 @@ const ViewWebhookLogsModal = ({
 																		logData.response ? 'gray' : 'yellow'
 																	}
 																>
-																	{logData.response ? 'Preview' : 'No Data'}
+																	{logData.response ? 'Просмотр' : 'Нет данных'}
 																</Tag>
 															</Tooltip>
 															{logData.response && (
@@ -259,7 +261,7 @@ const ViewWebhookLogsModal = ({
 													m="2% 0"
 												>
 													<Flex flex="1">
-														<Tooltip label="First Page">
+														<Tooltip label="Первая страница">
 															<IconButton
 																aria-label="icon button"
 																onClick={() =>
@@ -272,7 +274,7 @@ const ViewWebhookLogsModal = ({
 																icon={<FaAngleDoubleLeft />}
 															/>
 														</Tooltip>
-														<Tooltip label="Previous Page">
+														<Tooltip label="Предыдущая страница">
 															<IconButton
 																aria-label="icon button"
 																onClick={() =>
@@ -291,17 +293,17 @@ const ViewWebhookLogsModal = ({
 														alignItems="center"
 													>
 														<Text mr={8}>
-															Page{' '}
+															Страница{' '}
 															<Text fontWeight="bold" as="span">
 																{paginationProps.page}
 															</Text>{' '}
-															of{' '}
+															из{' '}
 															<Text fontWeight="bold" as="span">
 																{paginationProps.maxPages}
 															</Text>
 														</Text>
 														<Flex alignItems="center">
-															<Text flexShrink="0">Go to page:</Text>{' '}
+															<Text flexShrink="0">Перейти на страницу:</Text>{' '}
 															<NumberInput
 																ml={2}
 																mr={8}
@@ -334,13 +336,13 @@ const ViewWebhookLogsModal = ({
 														>
 															{pageLimits.map((pageSize) => (
 																<option key={pageSize} value={pageSize}>
-																	Show {pageSize}
+																	Показать {pageSize}
 																</option>
 															))}
 														</Select>
 													</Flex>
 													<Flex flex="1">
-														<Tooltip label="Next Page">
+														<Tooltip label="Следующая страница">
 															<IconButton
 																aria-label="icon button"
 																onClick={() =>
@@ -355,7 +357,7 @@ const ViewWebhookLogsModal = ({
 																icon={<FaAngleRight />}
 															/>
 														</Tooltip>
-														<Tooltip label="Last Page">
+														<Tooltip label="Последняя страница">
 															<IconButton
 																aria-label="icon button"
 																onClick={() =>
@@ -394,7 +396,7 @@ const ViewWebhookLogsModal = ({
 											fontWeight="bold"
 											color="#d9d9d9"
 										>
-											No Data
+											Нет данных
 										</Text>
 									</Flex>
 								)
@@ -413,7 +415,7 @@ const ViewWebhookLogsModal = ({
 							isDisabled={false}
 						>
 							<Center h="100%" pt="5%">
-								Close
+								Закрыть
 							</Center>
 						</Button>
 					</ModalFooter>

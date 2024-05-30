@@ -9,7 +9,7 @@ const AccessToken = ({ variables, setVariables }: any) => {
 		<div>
 			{' '}
 			<Text fontSize="md" paddingTop="2%" fontWeight="bold" mb={5}>
-				Access Token
+				Токен доступа
 			</Text>
 			<Stack spacing={6} padding="2% 0%">
 				<Flex direction={isNotSmallerScreen ? 'row' : 'column'}>
@@ -18,7 +18,9 @@ const AccessToken = ({ variables, setVariables }: any) => {
 						justifyContent="start"
 						alignItems="center"
 					>
-						<Text fontSize="sm">Access Token Expiry Time:</Text>
+						<Text fontSize="sm">
+							Время истечения срока действия токена доступа:
+						</Text>
 					</Flex>
 					<Flex
 						w={isNotSmallerScreen ? '70%' : '100%'}
@@ -39,9 +41,9 @@ const AccessToken = ({ variables, setVariables }: any) => {
 						justifyContent="start"
 						direction="column"
 					>
-						<Text fontSize="sm">Custom Scripts:</Text>
+						<Text fontSize="sm">Пользовательские скрипты:</Text>
 						<Text fontSize="xs" color="blackAlpha.500">
-							(Used to add custom fields in ID token)
+							(Используется для добавления пользовательских полей в ID-токен)
 						</Text>
 					</Flex>
 					<Flex
@@ -52,7 +54,7 @@ const AccessToken = ({ variables, setVariables }: any) => {
 							variables={variables}
 							setVariables={setVariables}
 							inputType={TextAreaInputType.CUSTOM_ACCESS_TOKEN_SCRIPT}
-							placeholder="Add script here"
+							placeholder="Добавьте скрипт сюда"
 							minH="25vh"
 						/>
 					</Flex>

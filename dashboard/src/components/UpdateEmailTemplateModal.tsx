@@ -2,6 +2,8 @@ import React, { useEffect, useRef, useState } from 'react';
 import {
 	Button,
 	Center,
+	Code,
+	Collapse,
 	Flex,
 	Input,
 	InputGroup,
@@ -19,8 +21,6 @@ import {
 	useToast,
 	Alert,
 	AlertIcon,
-	Collapse,
-	Box,
 	TableContainer,
 	Table,
 	Thead,
@@ -28,11 +28,11 @@ import {
 	Th,
 	Tbody,
 	Td,
-	Code,
 	Radio,
 	RadioGroup,
 	Stack,
 	Textarea,
+	Box,
 } from '@chakra-ui/react';
 import { FaPlus, FaAngleDown, FaAngleUp } from 'react-icons/fa';
 import { useClient } from 'urql';
@@ -333,10 +333,10 @@ const UpdateEmailTemplate = ({
 					isDisabled={false}
 					size="sm"
 				>
-					<Center h="100%">Add Template</Center>{' '}
+					<Center h="100%">Добавить шаблон</Center>{' '}
 				</Button>
 			) : (
-				<MenuItem onClick={onOpen}>Edit</MenuItem>
+				<MenuItem onClick={onOpen}>Редактировать</MenuItem>
 			)}
 			<Modal
 				isOpen={isOpen}
@@ -350,8 +350,8 @@ const UpdateEmailTemplate = ({
 				<ModalContent>
 					<ModalHeader>
 						{view === UpdateModalViews.ADD
-							? 'Add New Email Template'
-							: 'Edit Email Template'}
+							? 'Добавить новый шаблон электронной почты'
+							: 'Редактировать шаблон электронной почты'}
 					</ModalHeader>
 					<ModalCloseButton />
 					<ModalBody>
@@ -379,9 +379,9 @@ const UpdateEmailTemplate = ({
 									alignItems="center"
 								>
 									<Box width="85%">
-										<b>Note:</b> You can add set of dynamic variables to subject
-										and email body. Click here to see the set of dynamic
-										variables.
+										<b>Примечание:</b> Вы можете добавить набор динамических
+										переменных в тему и текст письма. Нажмите здесь, чтобы
+										посмотреть набор динамических переменных.
 									</Box>
 									{isDynamicVariableInfoOpen ? <FaAngleUp /> : <FaAngleDown />}
 								</Flex>
@@ -403,8 +403,8 @@ const UpdateEmailTemplate = ({
 									<Table variant="simple">
 										<Thead>
 											<Tr>
-												<Th>Variable</Th>
-												<Th>Description</Th>
+												<Th>Переменная</Th>
+												<Th>Описание</Th>
 											</Tr>
 										</Thead>
 										<Tbody>
@@ -435,7 +435,7 @@ const UpdateEmailTemplate = ({
 								alignItems="center"
 								marginBottom="2%"
 							>
-								<Flex flex="1">Event Name</Flex>
+								<Flex flex="1">Название события</Flex>
 								<Flex flex="3">
 									<Select
 										size="md"
@@ -465,13 +465,13 @@ const UpdateEmailTemplate = ({
 								alignItems="center"
 								marginBottom="2%"
 							>
-								<Flex flex="1">Subject</Flex>
+								<Flex flex="1">Тема</Flex>
 								<Flex flex="3">
 									<InputGroup size="md">
 										<Input
 											pr="4.5rem"
 											type="text"
-											placeholder="Subject Line"
+											placeholder="Тема письма"
 											value={templateData[EmailTemplateInputDataFields.SUBJECT]}
 											isInvalid={
 												!validator[EmailTemplateInputDataFields.SUBJECT]
@@ -492,7 +492,7 @@ const UpdateEmailTemplate = ({
 								alignItems="center"
 								marginBottom="2%"
 							>
-								<Flex flex="1">Template Body</Flex>
+								<Flex flex="1">Тело шаблона</Flex>
 								<Flex flex="3">
 									<RadioGroup
 										onChange={(value) => setEditor(value)}
@@ -500,10 +500,10 @@ const UpdateEmailTemplate = ({
 									>
 										<Stack direction="row" spacing="50px">
 											<Radio value={EmailTemplateEditors.PLAIN_HTML_EDITOR}>
-												Plain HTML
+												Простой HTML
 											</Radio>
 											<Radio value={EmailTemplateEditors.UNLAYER_EDITOR}>
-												Unlayer Editor
+												Редактор Unlayer
 											</Radio>
 										</Stack>
 									</RadioGroup>
@@ -527,7 +527,7 @@ const UpdateEmailTemplate = ({
 												[EmailTemplateInputDataFields.TEMPLATE]: e.target.value,
 											});
 										}}
-										placeholder="Template HTML"
+										placeholder="HTML-код шаблона"
 										border="0"
 										height="500px"
 									/>
@@ -542,7 +542,7 @@ const UpdateEmailTemplate = ({
 							isDisabled={loading}
 							marginRight="5"
 						>
-							Reset
+							Сбросить
 						</Button>
 						<Button
 							colorScheme="blue"
@@ -552,7 +552,7 @@ const UpdateEmailTemplate = ({
 							isDisabled={!validateData()}
 						>
 							<Center h="100%" pt="5%">
-								Save
+								Сохранить
 							</Center>
 						</Button>
 					</ModalFooter>

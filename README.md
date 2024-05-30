@@ -7,7 +7,7 @@
   Authorizer
 </h1>
 
-**Authorizer** is an open-source authentication and authorization solution for your applications. Bring your database and have complete control over the user information. You can self-host authorizer instances and connect to any database (Currently supports 11+ databases including [Postgres](https://www.postgresql.org/), [MySQL](https://www.mysql.com/), [SQLite](https://www.sqlite.org/index.html), [SQLServer](https://www.microsoft.com/en-us/sql-server/), [YugaByte](https://www.yugabyte.com/),  [MariaDB](https://mariadb.org/), [PlanetScale](https://planetscale.com/), [CassandraDB](https://cassandra.apache.org/_/index.html), [ScyllaDB](https://www.scylladb.com/), [MongoDB](https://mongodb.com/), [ArangoDB](https://www.arangodb.com/)).
+**Authorizer** is an open-source authentication and authorization solution for your applications. Bring your database and have complete control over the user information. You can self-host authorizer instances and connect to any database (Currently supports 11+ databases including [Postgres](https://www.postgresql.org/), [MySQL](https://www.mysql.com/), [SQLite](https://www.sqlite.org/index.html), [SQLServer](https://www.microsoft.com/en-us/sql-server/), [YugaByte](https://www.yugabyte.com/), [MariaDB](https://mariadb.org/), [PlanetScale](https://planetscale.com/), [CassandraDB](https://cassandra.apache.org/_/index.html), [ScyllaDB](https://www.scylladb.com/), [MongoDB](https://mongodb.com/), [ArangoDB](https://www.arangodb.com/)).
 
 For more information check:
 
@@ -63,13 +63,13 @@ For more information check:
 
 Deploy production ready Authorizer instance using one click deployment options available below
 
-| **Infra provider** |                                                                                            **One-click link**                                                                                            |               **Additional information**               |
-| :----------------: | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :----------------------------------------------------: |
-|    Railway.app     |                    <a href="https://railway.app/new/template/nwXp1C?referralCode=FEF4uT"><img src="https://railway.app/button.svg" style="height: 44px" alt="Deploy on Railway"></a>                     | [docs](https://docs.authorizer.dev/deployment/railway) |
-|       Heroku       | <a href="https://heroku.com/deploy?template=https://github.com/authorizerdev/authorizer-heroku"><img src="https://www.herokucdn.com/deploy/button.svg" alt="Deploy to Heroku" style="height: 44px;"></a> | [docs](https://docs.authorizer.dev/deployment/heroku)  |
-|       Render       |                     [![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/authorizerdev/authorizer-render)                      | [docs](https://docs.authorizer.dev/deployment/render)  |
-|       Koyeb       | <a target="_blank" href="https://app.koyeb.com/deploy?name=authorizer&type=docker&image=docker.io/lakhansamani/authorizer&env[PORT]=8000&env[DATABASE_TYPE]=postgres&env[DATABASE_URL]=CHANGE_ME&ports=8000;http;/"><img alt="Deploy to Koyeb" src="https://www.koyeb.com/static/images/deploy/button.svg" /></a> | [docs](https://docs.authorizer.dev/deployment/koyeb)  |
-|     RepoCloud     | <a href="https://repocloud.io/details/?app_id=174"><img src="https://d16t0pc4846x52.cloudfront.net/deploy.png" alt="Deploy on RepoCloud"></a> | [docs](https://repocloud.io/details/?app_id=174) |
+| **Infra provider** |                                                                                                                                                **One-click link**                                                                                                                                                 |               **Additional information**               |
+| :----------------: | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :----------------------------------------------------: |
+|    Railway.app     |                                                                         <a href="https://railway.app/new/template/nwXp1C?referralCode=FEF4uT"><img src="https://railway.app/button.svg" style="height: 44px" alt="Deploy on Railway"></a>                                                                         | [docs](https://docs.authorizer.dev/deployment/railway) |
+|       Heroku       |                                                     <a href="https://heroku.com/deploy?template=https://github.com/authorizerdev/authorizer-heroku"><img src="https://www.herokucdn.com/deploy/button.svg" alt="Deploy to Heroku" style="height: 44px;"></a>                                                      | [docs](https://docs.authorizer.dev/deployment/heroku)  |
+|       Render       |                                                                          [![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/authorizerdev/authorizer-render)                                                                          | [docs](https://docs.authorizer.dev/deployment/render)  |
+|       Koyeb        | <a target="_blank" href="https://app.koyeb.com/deploy?name=authorizer&type=docker&image=docker.io/lakhansamani/authorizer&env[PORT]=8000&env[DATABASE_TYPE]=postgres&env[DATABASE_URL]=CHANGE_ME&ports=8000;http;/"><img alt="Deploy to Koyeb" src="https://www.koyeb.com/static/images/deploy/button.svg" /></a> |  [docs](https://docs.authorizer.dev/deployment/koyeb)  |
+|     RepoCloud      |                                                                                   <a href="https://repocloud.io/details/?app_id=174"><img src="https://d16t0pc4846x52.cloudfront.net/deploy.png" alt="Deploy on RepoCloud"></a>                                                                                   |    [docs](https://repocloud.io/details/?app_id=174)    |
 
 ### Deploy Authorizer Using Source Code
 
@@ -155,7 +155,7 @@ binaries are baked with required deployment files and bundled. You can download 
 
 ## Integrating into your website
 
-This example demonstrates how you can use [`@authorizerdev/authorizer-js`](/authorizer-js/getting-started) CDN version and have login ready for your site in few seconds. You can also use the ES module version of [`@authorizerdev/authorizer-js`](/authorizer-js/getting-started) or framework-specific versions like [`@authorizerdev/authorizer-react`](/authorizer-react/getting-started)
+This example demonstrates how you can use [`@authorizerdev/authorizer-js`](/authorizer-js/getting-started) CDN version and have login ready for your site in few seconds. You can also use the ES module version of [`@authorizerdev/authorizer-js`](/authorizer-js/getting-started) or framework-specific versions like [`kokateam-authorizer-react`](/kokateam-authorizer-react/getting-started)
 
 ### Copy the following code in `html` file
 
@@ -165,36 +165,36 @@ This example demonstrates how you can use [`@authorizerdev/authorizer-js`](/auth
 <script src="https://unpkg.com/@authorizerdev/authorizer-js/lib/authorizer.min.js"></script>
 
 <script type="text/javascript">
-	const authorizerRef = new authorizerdev.Authorizer({
-		authorizerURL: `YOUR_AUTHORIZER_INSTANCE_URL`,
-		redirectURL: window.location.origin,
-		clientID: 'YOUR_CLIENT_ID', // obtain your client id from authorizer dashboard
-	});
+  const authorizerRef = new authorizerdev.Authorizer({
+    authorizerURL: `YOUR_AUTHORIZER_INSTANCE_URL`,
+    redirectURL: window.location.origin,
+    clientID: "YOUR_CLIENT_ID", // obtain your client id from authorizer dashboard
+  });
 
-	// use the button selector as per your application
-	const logoutBtn = document.getElementById('logout');
-	logoutBtn.addEventListener('click', async function () {
-		await authorizerRef.logout();
-		window.location.href = '/';
-	});
+  // use the button selector as per your application
+  const logoutBtn = document.getElementById("logout");
+  logoutBtn.addEventListener("click", async function () {
+    await authorizerRef.logout();
+    window.location.href = "/";
+  });
 
-	async function onLoad() {
-		const res = await authorizerRef.authorize({
-			response_type: 'code',
-			use_refresh_token: false,
-		});
-		if (res && res.access_token) {
-			// you can use user information here, eg:
-			const user = await authorizerRef.getProfile({
-				Authorization: `Bearer ${res.access_token}`,
-			});
-			const userSection = document.getElementById('user');
-			const logoutSection = document.getElementById('logout-section');
-			logoutSection.classList.toggle('hide');
-			userSection.innerHTML = `Welcome, ${user.email}`;
-		}
-	}
-	onLoad();
+  async function onLoad() {
+    const res = await authorizerRef.authorize({
+      response_type: "code",
+      use_refresh_token: false,
+    });
+    if (res && res.access_token) {
+      // you can use user information here, eg:
+      const user = await authorizerRef.getProfile({
+        Authorization: `Bearer ${res.access_token}`,
+      });
+      const userSection = document.getElementById("user");
+      const logoutSection = document.getElementById("logout-section");
+      logoutSection.classList.toggle("hide");
+      userSection.innerHTML = `Welcome, ${user.email}`;
+    }
+  }
+  onLoad();
 </script>
 ```
 

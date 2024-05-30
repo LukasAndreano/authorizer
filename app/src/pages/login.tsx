@@ -5,7 +5,7 @@ import {
 	AuthorizerMagicLinkLogin,
 	AuthorizerSocialLogin,
 	useAuthorizer,
-} from '@authorizerdev/authorizer-react';
+} from 'kokateam-authorizer-react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
@@ -57,7 +57,7 @@ export default function Login({ urlProps }: { urlProps: Record<string, any> }) {
 									onClick={() => setView(VIEW_TYPES.FORGOT_PASSWORD)}
 									style={{ marginBottom: 10 }}
 								>
-									Forgot Password?
+									Забыли пароль?
 								</Link>
 							</Footer>
 						)}
@@ -65,7 +65,7 @@ export default function Login({ urlProps }: { urlProps: Record<string, any> }) {
 			)}
 			{view === VIEW_TYPES.FORGOT_PASSWORD && (
 				<Fragment>
-					<h1 style={{ textAlign: 'center' }}>Forgot Password</h1>
+					<h1 style={{ textAlign: 'center' }}>Восстановление пароля</h1>
 					<AuthorizerForgotPassword
 						urlProps={{
 							...urlProps,
@@ -81,7 +81,7 @@ export default function Login({ urlProps }: { urlProps: Record<string, any> }) {
 							onClick={() => setView(VIEW_TYPES.LOGIN)}
 							style={{ marginBottom: 10 }}
 						>
-							Back
+							Назад
 						</Link>
 					</Footer>
 				</Fragment>
@@ -90,7 +90,7 @@ export default function Login({ urlProps }: { urlProps: Record<string, any> }) {
 				!config.is_magic_link_login_enabled &&
 				config.is_sign_up_enabled && (
 					<FooterContent>
-						Don't have an account? &nbsp; <Link to="/app/signup"> Sign Up</Link>
+						Нет аккаунта? &nbsp; <Link to="/app/signup"> Создать</Link>
 					</FooterContent>
 				)}
 		</Fragment>

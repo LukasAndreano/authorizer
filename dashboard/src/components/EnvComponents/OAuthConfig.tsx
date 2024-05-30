@@ -39,12 +39,12 @@ const OAuthConfig = ({
 		<div>
 			<Box>
 				<Text fontSize="md" paddingTop="2%" fontWeight="bold" mb={6}>
-					Authorizer Config
+					Настройки Authorizer
 				</Text>
 				<Stack spacing={6} padding="2% 0%">
 					<Flex direction={isNotSmallerScreen ? 'row' : 'column'}>
 						<Flex w="30%" justifyContent="start" alignItems="center">
-							<Text fontSize="sm">Client ID</Text>
+							<Text fontSize="sm">ID клиента</Text>
 						</Flex>
 						<Center
 							w={isNotSmallerScreen ? '70%' : '100%'}
@@ -54,14 +54,14 @@ const OAuthConfig = ({
 								variables={envVariables}
 								setVariables={() => {}}
 								inputType={TextInputType.CLIENT_ID}
-								placeholder="Client ID"
+								placeholder="ID клиента"
 								readOnly={true}
 							/>
 						</Center>
 					</Flex>
 					<Flex direction={isNotSmallerScreen ? 'row' : 'column'}>
 						<Flex w="30%" justifyContent="start" alignItems="center">
-							<Text fontSize="sm">Client Secret</Text>
+							<Text fontSize="sm">Секрет клиента</Text>
 						</Flex>
 						<Center
 							w={isNotSmallerScreen ? '70%' : '100%'}
@@ -73,14 +73,14 @@ const OAuthConfig = ({
 								fieldVisibility={fieldVisibility}
 								setFieldVisibility={setFieldVisibility}
 								inputType={HiddenInputType.CLIENT_SECRET}
-								placeholder="Client Secret"
+								placeholder="Секрет клиента"
 								readOnly={true}
 							/>
 						</Center>
 					</Flex>
 					<Flex direction={isNotSmallerScreen ? 'row' : 'column'}>
 						<Flex w="30%" justifyContent="start" alignItems="center">
-							<Text fontSize="sm">Default Response Type:</Text>
+							<Text fontSize="sm">Тип ответа по умолчанию:</Text>
 						</Flex>
 						<Flex
 							w={isNotSmallerScreen ? '70%' : '100%'}
@@ -98,7 +98,7 @@ const OAuthConfig = ({
 					</Flex>
 					<Flex direction={isNotSmallerScreen ? 'row' : 'column'}>
 						<Flex w="30%" justifyContent="start" alignItems="center">
-							<Text fontSize="sm">Default Response Mode:</Text>
+							<Text fontSize="sm">Режим ответа по умолчанию:</Text>
 						</Flex>
 						<Flex
 							w={isNotSmallerScreen ? '70%' : '100%'}
@@ -117,7 +117,7 @@ const OAuthConfig = ({
 				</Stack>
 				<Divider mt={5} mb={2} color="blackAlpha.700" />
 				<Text fontSize="md" paddingTop="2%" fontWeight="bold" mb={4}>
-					Social Media Logins
+					Вход через социальные сети
 				</Text>
 				<Stack spacing={6} padding="2% 0%">
 					<Flex direction={isNotSmallerScreen ? 'row' : 'column'}>
@@ -140,7 +140,7 @@ const OAuthConfig = ({
 								variables={envVariables}
 								setVariables={setVariables}
 								inputType={TextInputType.GOOGLE_CLIENT_ID}
-								placeholder="Google Client ID"
+								placeholder="ID клиента Google"
 							/>
 						</Center>
 						<Center
@@ -154,7 +154,7 @@ const OAuthConfig = ({
 								fieldVisibility={fieldVisibility}
 								setFieldVisibility={setFieldVisibility}
 								inputType={HiddenInputType.GOOGLE_CLIENT_SECRET}
-								placeholder="Google Client Secret"
+								placeholder="Секрет клиента Google"
 							/>
 						</Center>
 					</Flex>
@@ -178,7 +178,7 @@ const OAuthConfig = ({
 								variables={envVariables}
 								setVariables={setVariables}
 								inputType={TextInputType.GITHUB_CLIENT_ID}
-								placeholder="Github Client ID"
+								placeholder="ID клиента Github"
 							/>
 						</Center>
 						<Center
@@ -192,7 +192,7 @@ const OAuthConfig = ({
 								fieldVisibility={fieldVisibility}
 								setFieldVisibility={setFieldVisibility}
 								inputType={HiddenInputType.GITHUB_CLIENT_SECRET}
-								placeholder="Github Client Secret"
+								placeholder="Секрет клиента Github"
 							/>
 						</Center>
 					</Flex>
@@ -216,7 +216,7 @@ const OAuthConfig = ({
 								variables={envVariables}
 								setVariables={setVariables}
 								inputType={TextInputType.FACEBOOK_CLIENT_ID}
-								placeholder="Facebook Client ID"
+								placeholder="ID клиента Facebook"
 							/>
 						</Center>
 						<Center
@@ -230,7 +230,7 @@ const OAuthConfig = ({
 								fieldVisibility={fieldVisibility}
 								setFieldVisibility={setFieldVisibility}
 								inputType={HiddenInputType.FACEBOOK_CLIENT_SECRET}
-								placeholder="Facebook Client Secret"
+								placeholder="Секрет клиента Facebook"
 							/>
 						</Center>
 					</Flex>
@@ -254,7 +254,7 @@ const OAuthConfig = ({
 								variables={envVariables}
 								setVariables={setVariables}
 								inputType={TextInputType.LINKEDIN_CLIENT_ID}
-								placeholder="LinkedIn Client ID"
+								placeholder="ID клиента LinkedIn"
 							/>
 						</Center>
 						<Center
@@ -268,7 +268,7 @@ const OAuthConfig = ({
 								fieldVisibility={fieldVisibility}
 								setFieldVisibility={setFieldVisibility}
 								inputType={HiddenInputType.LINKEDIN_CLIENT_SECRET}
-								placeholder="LinkedIn Client Secret"
+								placeholder="Секрет клиента LinkedIn"
 							/>
 						</Center>
 					</Flex>
@@ -292,7 +292,7 @@ const OAuthConfig = ({
 								variables={envVariables}
 								setVariables={setVariables}
 								inputType={TextInputType.APPLE_CLIENT_ID}
-								placeholder="Apple Client ID"
+								placeholder="ID клиента Apple"
 							/>
 						</Center>
 						<Center
@@ -306,7 +306,7 @@ const OAuthConfig = ({
 								fieldVisibility={fieldVisibility}
 								setFieldVisibility={setFieldVisibility}
 								inputType={HiddenInputType.APPLE_CLIENT_SECRET}
-								placeholder="Apple Client Secret"
+								placeholder="Секрет клиента Apple"
 							/>
 						</Center>
 					</Flex>
@@ -330,7 +330,7 @@ const OAuthConfig = ({
 								variables={envVariables}
 								setVariables={setVariables}
 								inputType={TextInputType.DISCORD_CLIENT_ID}
-								placeholder="Discord Client ID"
+								placeholder="ID клиента Discord"
 							/>
 						</Center>
 						<Center
@@ -344,7 +344,7 @@ const OAuthConfig = ({
 								fieldVisibility={fieldVisibility}
 								setFieldVisibility={setFieldVisibility}
 								inputType={HiddenInputType.DISCORD_CLIENT_SECRET}
-								placeholder="Discord Client Secret"
+								placeholder="Секрет клиента Discord"
 							/>
 						</Center>
 					</Flex>
@@ -368,7 +368,7 @@ const OAuthConfig = ({
 								variables={envVariables}
 								setVariables={setVariables}
 								inputType={TextInputType.TWITTER_CLIENT_ID}
-								placeholder="Twitter Client ID"
+								placeholder="ID клиента Twitter"
 							/>
 						</Center>
 						<Center
@@ -382,7 +382,7 @@ const OAuthConfig = ({
 								fieldVisibility={fieldVisibility}
 								setFieldVisibility={setFieldVisibility}
 								inputType={HiddenInputType.TWITTER_CLIENT_SECRET}
-								placeholder="Twitter Client Secret"
+								placeholder="Секрет клиента Twitter"
 							/>
 						</Center>
 					</Flex>
@@ -406,7 +406,7 @@ const OAuthConfig = ({
 								variables={envVariables}
 								setVariables={setVariables}
 								inputType={TextInputType.MICROSOFT_ACTIVE_DIRECTORY_TENANT_ID}
-								placeholder="Microsoft Active Directory TenantID"
+								placeholder="TenantID Microsoft Active Directory"
 							/>
 						</Center>
 						<Center
@@ -419,7 +419,7 @@ const OAuthConfig = ({
 								variables={envVariables}
 								setVariables={setVariables}
 								inputType={TextInputType.MICROSOFT_CLIENT_ID}
-								placeholder="Microsoft Client ID"
+								placeholder="ID клиента Microsoft"
 							/>
 						</Center>
 						<Center
@@ -433,7 +433,7 @@ const OAuthConfig = ({
 								fieldVisibility={fieldVisibility}
 								setFieldVisibility={setFieldVisibility}
 								inputType={HiddenInputType.MICROSOFT_CLIENT_SECRET}
-								placeholder="Microsoft Client Secret"
+								placeholder="Секрет клиента Microsoft"
 							/>
 						</Center>
 					</Flex>
@@ -457,7 +457,7 @@ const OAuthConfig = ({
 								variables={envVariables}
 								setVariables={setVariables}
 								inputType={TextInputType.TWITCH_CLIENT_ID}
-								placeholder="Twitch Client ID"
+								placeholder="ID клиента Twitch"
 							/>
 						</Center>
 						<Center
@@ -471,7 +471,7 @@ const OAuthConfig = ({
 								fieldVisibility={fieldVisibility}
 								setFieldVisibility={setFieldVisibility}
 								inputType={HiddenInputType.TWITCH_CLIENT_SECRET}
-								placeholder="Twitch Client Secret"
+								placeholder="Секрет клиента Twitch"
 							/>
 						</Center>
 					</Flex>
@@ -498,7 +498,7 @@ const OAuthConfig = ({
 								variables={envVariables}
 								setVariables={setVariables}
 								inputType={TextInputType.ROBLOX_CLIENT_ID}
-								placeholder="Roblox Client ID"
+								placeholder="ID клиента Roblox"
 							/>
 						</Center>
 						<Center
@@ -512,7 +512,7 @@ const OAuthConfig = ({
 								fieldVisibility={fieldVisibility}
 								setFieldVisibility={setFieldVisibility}
 								inputType={HiddenInputType.ROBLOX_CLIENT_SECRET}
-								placeholder="Roblox Client Secret"
+								placeholder="Секрет клиента Roblox"
 							/>
 						</Center>
 					</Flex>

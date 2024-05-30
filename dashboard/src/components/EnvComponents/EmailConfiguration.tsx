@@ -13,12 +13,12 @@ const EmailConfigurations = ({
 		<div>
 			{' '}
 			<Text fontSize="md" paddingTop="2%" fontWeight="bold" mb={5}>
-				Email Configurations
+				Настройки электронной почты
 			</Text>
 			<Stack spacing={6} padding="2% 0%">
 				<Flex direction={isNotSmallerScreen ? 'row' : 'column'}>
 					<Flex w="30%" justifyContent="start" alignItems="center">
-						<Text fontSize="sm">SMTP Host:</Text>
+						<Text fontSize="sm">SMTP-хост:</Text>
 					</Flex>
 					<Center
 						w={isNotSmallerScreen ? '70%' : '100%'}
@@ -34,7 +34,7 @@ const EmailConfigurations = ({
 				</Flex>
 				<Flex direction={isNotSmallerScreen ? 'row' : 'column'}>
 					<Flex w="30%" justifyContent="start" alignItems="center">
-						<Text fontSize="sm">SMTP Port:</Text>
+						<Text fontSize="sm">SMTP-порт:</Text>
 					</Flex>
 					<Center
 						w={isNotSmallerScreen ? '70%' : '100%'}
@@ -54,7 +54,7 @@ const EmailConfigurations = ({
 						justifyContent="start"
 						alignItems="center"
 					>
-						<Text fontSize="sm">SMTP Local Name:</Text>
+						<Text fontSize="sm">Локальное имя SMTP:</Text>
 					</Flex>
 					<Center
 						w={isNotSmallerScreen ? '70%' : '100%'}
@@ -74,7 +74,7 @@ const EmailConfigurations = ({
 						justifyContent="start"
 						alignItems="center"
 					>
-						<Text fontSize="sm">SMTP Username:</Text>
+						<Text fontSize="sm">Имя пользователя SMTP:</Text>
 					</Flex>
 					<Center
 						w={isNotSmallerScreen ? '70%' : '100%'}
@@ -94,7 +94,7 @@ const EmailConfigurations = ({
 						justifyContent="start"
 						alignItems="center"
 					>
-						<Text fontSize="sm">SMTP Password:</Text>
+						<Text fontSize="sm">Пароль SMTP:</Text>
 					</Flex>
 					<Center
 						w={isNotSmallerScreen ? '70%' : '100%'}
@@ -112,7 +112,7 @@ const EmailConfigurations = ({
 				</Flex>
 				<Flex direction={isNotSmallerScreen ? 'row' : 'column'}>
 					<Flex w="30%" justifyContent="start" alignItems="center">
-						<Text fontSize="sm">From Email:</Text>
+						<Text fontSize="sm">Email отправителя:</Text>
 					</Flex>
 					<Center
 						w={isNotSmallerScreen ? '70%' : '100%'}
@@ -128,7 +128,7 @@ const EmailConfigurations = ({
 				</Flex>
 				<Flex direction={isNotSmallerScreen ? 'row' : 'column'}>
 					<Flex w="30%" justifyContent="start" alignItems="center">
-						<Text fontSize="sm">Sender Name:</Text>
+						<Text fontSize="sm">Имя отправителя:</Text>
 					</Flex>
 					<Center
 						w={isNotSmallerScreen ? '70%' : '100%'}

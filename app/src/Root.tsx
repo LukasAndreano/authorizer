@@ -1,6 +1,6 @@
 import React, { useEffect, lazy, Suspense } from 'react';
 import { Switch, Route } from 'react-router-dom';
-import { useAuthorizer } from '@authorizerdev/authorizer-react';
+import { useAuthorizer } from 'kokateam-authorizer-react';
 import styled, { ThemeProvider } from 'styled-components';
 import SetupPassword from './pages/setup-password';
 import { hasWindow, createRandomString } from './utils/common';
@@ -91,7 +91,7 @@ export default function Root({
 	}, [token, config]);
 
 	if (loading) {
-		return <h1>Loading...</h1>;
+		return <h1>Загрузка...</h1>;
 	}
 
 	if (token) {

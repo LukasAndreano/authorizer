@@ -260,87 +260,87 @@ export enum webhookVerifiedStatus {
 
 export const emailTemplateVariables = {
 	'user.id': {
-		description: `User identifier`,
+		description: `Идентификатор пользователя`,
 		value: '{.user.id}}',
 	},
 	'user.email': {
-		description: 'User email address',
+		description: 'Адрес электронной почты пользователя',
 		value: '{.user.email}}',
 	},
 	'user.given_name': {
-		description: `User first name`,
+		description: `Имя пользователя`,
 		value: '{.user.given_name}}',
 	},
 	'user.family_name': {
-		description: `User last name`,
+		description: `Фамилия пользователя`,
 		value: '{.user.family_name}}',
 	},
 	'user.middle_name': {
-		description: `Middle name of user`,
+		description: `Отчество пользователя`,
 		value: '{.user.middle_name}}',
 	},
 	'user.nickname': {
-		description: `Nick name of user`,
+		description: `Никнейм пользователя`,
 		value: '{.user.nickname}}',
 	},
 	'user.preferred_username': {
-		description: `Username, by default it is email`,
+		description: `Имя пользователя, по умолчанию это адрес электронной почты`,
 		value: '{.user.preferred_username}}',
 	},
 	'user.signup_methods': {
-		description: `Comma separated list of methods using which user has signed up`,
+		description: `Список методов, разделенных запятыми, с помощью которых пользователь зарегистрировался`,
 		value: '{.user.signup_methods}}',
 	},
 	'user.email_verified': {
-		description: `Whether email is verified or not`,
+		description: `Подтвержден ли адрес электронной почты`,
 		value: '{.user.email_verified}}',
 	},
 	'user.picture': {
-		description: `URL of the user profile picture`,
+		description: `URL-адрес изображения профиля пользователя`,
 		value: '{.user.picture}}',
 	},
 	'user.roles': {
-		description: `Comma separated list of roles assigned to user`,
+		description: `Список ролей, назначенных пользователю, разделенных запятыми`,
 		value: '{.user.roles}}',
 	},
 	'user.gender': {
-		description: `Gender of user`,
+		description: `Пол пользователя`,
 		value: '{.user.gender}}',
 	},
 	'user.birthdate': {
-		description: `BirthDate of user`,
+		description: `Дата рождения пользователя`,
 		value: '{.user.birthdate}}',
 	},
 	'user.phone_number': {
-		description: `Phone number of user`,
+		description: `Номер телефона пользователя`,
 		value: '{.user.phone_number}}',
 	},
 	'user.phone_number_verified': {
-		description: `Whether phone number is verified or not`,
+		description: `Подтвержден ли номер телефона`,
 		value: '{.user.phone_number_verified}}',
 	},
 	'user.created_at': {
-		description: `User created at time`,
+		description: `Время создания пользователя`,
 		value: '{.user.created_at}}',
 	},
 	'user.updated_at': {
-		description: `Last updated time at user`,
+		description: `Время последнего обновления пользователя`,
 		value: '{.user.updated_at}}',
 	},
 	'organization.name': {
-		description: `Organization name`,
+		description: `Название организации`,
 		value: '{.organization.name}}',
 	},
 	'organization.logo': {
-		description: `Organization logo`,
+		description: `Логотип организации`,
 		value: '{.organization.logo}}',
 	},
 	verification_url: {
-		description: `Verification URL in case of events other than verify otp`,
+		description: `URL-адрес подтверждения для событий, отличных от подтверждения OTP`,
 		value: '{.verification_url}}',
 	},
 	otp: {
-		description: `OTP sent during login with Multi factor authentication`,
+		description: `OTP, отправленный во время входа в систему с многофакторной аутентификацией`,
 		value: '{.otp}}',
 	},
 };

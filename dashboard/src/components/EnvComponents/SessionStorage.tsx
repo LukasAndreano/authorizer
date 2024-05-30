@@ -8,17 +8,17 @@ const SessionStorage = ({ variables, setVariables, RedisURL }: any) => {
 		<div>
 			{' '}
 			<Text fontSize="md" paddingTop="2%" fontWeight="bold" mb={5}>
-				Session Storage
+				Хранилище сессий
 			</Text>
 			<Text fontStyle="italic" fontSize="sm" color="blackAlpha.500" mt={3}>
-				Note: Redis related environment variables cannot be updated from
-				dashboard. Please use .env file or OS environment variables to update
-				it.
+				Примечание: Переменные среды, связанные с Redis, не могут быть обновлены
+				из панели управления. Пожалуйста, используйте файл .env или переменные
+				среды ОС для их обновления.
 			</Text>
 			<Stack spacing={6} padding="2% 0%">
 				<Flex direction={isNotSmallerScreen ? 'row' : 'column'}>
 					<Flex w="30%" justifyContent="start" alignItems="center">
-						<Text fontSize="sm">Redis URL:</Text>
+						<Text fontSize="sm">URL-адрес Redis:</Text>
 					</Flex>
 					<Center
 						w={isNotSmallerScreen ? '70%' : '100%'}
@@ -30,7 +30,7 @@ const SessionStorage = ({ variables, setVariables, RedisURL }: any) => {
 							variables={variables}
 							setVariables={setVariables}
 							inputType={RedisURL}
-							placeholder="Redis URL"
+							placeholder="URL-адрес Redis"
 						/>
 					</Center>
 				</Flex>

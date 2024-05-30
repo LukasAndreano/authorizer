@@ -61,14 +61,14 @@ const DeleteEmailTemplateModal = ({
 	};
 	return (
 		<>
-			<MenuItem onClick={onOpen}>Delete</MenuItem>
+			<MenuItem onClick={onOpen}>Удалить</MenuItem>
 			<Modal isOpen={isOpen} onClose={onClose}>
 				<ModalOverlay />
 				<ModalContent>
-					<ModalHeader>Delete Email Template</ModalHeader>
+					<ModalHeader>Удалить шаблон электронной почты</ModalHeader>
 					<ModalCloseButton />
 					<ModalBody>
-						<Text fontSize="md">Are you sure?</Text>
+						<Text fontSize="md">Вы уверены?</Text>
 						<Flex
 							padding="5%"
 							marginTop="5%"
@@ -78,8 +78,8 @@ const DeleteEmailTemplateModal = ({
 							flexDirection="column"
 						>
 							<Text fontSize="sm">
-								Email template for event <b>{eventName}</b> will be deleted
-								permanently!
+								Шаблон электронной почты для события <b>{eventName}</b> будет
+								удален безвозвратно!
 							</Text>
 						</Flex>
 					</ModalBody>
@@ -93,7 +93,7 @@ const DeleteEmailTemplateModal = ({
 							isDisabled={false}
 						>
 							<Center h="100%" pt="5%">
-								Delete
+								Удалить
 							</Center>
 						</Button>
 					</ModalFooter>

@@ -49,7 +49,7 @@ export function AuthLayout({ children }: { children: React.ReactNode }) {
 						{children}
 					</Box>
 					<Text color="gray.600" fontSize="sm">
-						Current Version: {data.meta.version}
+						Текущая версия: {data.meta.version}
 					</Text>
 				</>
 			)}

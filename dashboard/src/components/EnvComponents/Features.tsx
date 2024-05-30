@@ -8,12 +8,12 @@ const Features = ({ variables, setVariables }: any) => {
 		<div>
 			{' '}
 			<Text fontSize="md" paddingTop="2%" fontWeight="bold" mb={5}>
-				Features
+				Функции
 			</Text>
 			<Stack spacing={6}>
 				<Flex>
 					<Flex w="100%" justifyContent="start" alignItems="center">
-						<Text fontSize="sm">Login Page:</Text>
+						<Text fontSize="sm">Страница входа:</Text>
 					</Flex>
 					<Flex justifyContent="start">
 						<InputField
@@ -27,7 +27,7 @@ const Features = ({ variables, setVariables }: any) => {
 
 				<Flex>
 					<Flex w="100%" justifyContent="start" alignItems="center">
-						<Text fontSize="sm">Email Verification:</Text>
+						<Text fontSize="sm">Подтверждение электронной почты:</Text>
 					</Flex>
 					<Flex justifyContent="start">
 						<InputField
@@ -40,7 +40,7 @@ const Features = ({ variables, setVariables }: any) => {
 				</Flex>
 				<Flex>
 					<Flex w="100%" justifyContent="start" alignItems="center">
-						<Text fontSize="sm">Magic Login Link:</Text>
+						<Text fontSize="sm">Волшебная ссылка для входа:</Text>
 					</Flex>
 					<Flex justifyContent="start">
 						<InputField
@@ -53,7 +53,9 @@ const Features = ({ variables, setVariables }: any) => {
 				</Flex>
 				<Flex>
 					<Flex w="100%" justifyContent="start" alignItems="center">
-						<Text fontSize="sm">Email Basic Authentication:</Text>
+						<Text fontSize="sm">
+							Базовая аутентификация по электронной почте:
+						</Text>
 					</Flex>
 					<Flex justifyContent="start">
 						<InputField
@@ -66,7 +68,9 @@ const Features = ({ variables, setVariables }: any) => {
 				</Flex>
 				<Flex>
 					<Flex w="100%" justifyContent="start" alignItems="center">
-						<Text fontSize="sm">Mobile Basic Authentication:</Text>
+						<Text fontSize="sm">
+							Базовая аутентификация для мобильных устройств:
+						</Text>
 					</Flex>
 					<Flex justifyContent="start">
 						<InputField
@@ -79,7 +83,7 @@ const Features = ({ variables, setVariables }: any) => {
 				</Flex>
 				<Flex>
 					<Flex w="100%" justifyContent="start" alignItems="center">
-						<Text fontSize="sm">Sign Up:</Text>
+						<Text fontSize="sm">Регистрация:</Text>
 					</Flex>
 					<Flex justifyContent="start" mb={3}>
 						<InputField
@@ -92,7 +96,7 @@ const Features = ({ variables, setVariables }: any) => {
 				</Flex>
 				<Flex>
 					<Flex w="100%" justifyContent="start" alignItems="center">
-						<Text fontSize="sm">Strong Password:</Text>
+						<Text fontSize="sm">Надежный пароль:</Text>
 					</Flex>
 					<Flex justifyContent="start" mb={3}>
 						<InputField
@@ -105,10 +109,11 @@ const Features = ({ variables, setVariables }: any) => {
 				</Flex>
 				<Flex alignItems="center">
 					<Flex w="100%" alignItems="baseline" flexDir="column">
-						<Text fontSize="sm">Multi Factor Authentication (MFA):</Text>
+						<Text fontSize="sm">Многофакторная аутентификация (MFA):</Text>
 						<Text fontSize="x-small">
-							Note: Enabling this will ignore Enforcing MFA shown below and will
-							also ignore the user MFA setting.
+							Примечание: Включение этой опции проигнорирует Принудительное
+							применение MFA, показанное ниже, а также игнорирует настройку MFA
+							пользователя.
 						</Text>
 					</Flex>
 
@@ -124,8 +129,10 @@ const Features = ({ variables, setVariables }: any) => {
 				{!variables.DISABLE_MULTI_FACTOR_AUTHENTICATION && (
 					<Flex alignItems="center">
 						<Flex w="100%" alignItems="baseline" flexDir="column">
-							<Text fontSize="sm">Time Based OTP (TOTP):</Text>
-							<Text fontSize="x-small">Note: to enable totp mfa</Text>
+							<Text fontSize="sm">Временный OTP (TOTP):</Text>
+							<Text fontSize="x-small">
+								Примечание: чтобы включить TOTP MFA
+							</Text>
 						</Flex>
 
 						<Flex justifyContent="start" mb={3}>
@@ -142,7 +149,9 @@ const Features = ({ variables, setVariables }: any) => {
 					<Flex alignItems="center">
 						<Flex w="100%" alignItems="baseline" flexDir="column">
 							<Text fontSize="sm">EMAIL OTP:</Text>
-							<Text fontSize="x-small">Note: to enable email otp mfa</Text>
+							<Text fontSize="x-small">
+								Примечание: чтобы включить Email OTP MFA
+							</Text>
 						</Flex>
 
 						<Flex justifyContent="start" mb={3}>
@@ -159,11 +168,12 @@ const Features = ({ variables, setVariables }: any) => {
 				<Flex alignItems="center">
 					<Flex w="100%" alignItems="baseline" flexDir="column">
 						<Text fontSize="sm">
-							Enforce Multi Factor Authentication (MFA):
+							Принудительное применение многофакторной аутентификации (MFA):
 						</Text>
 						<Text fontSize="x-small">
-							Note: If you disable enforcing after it was enabled, it will still
-							keep MFA enabled for older users.
+							Примечание: Если вы отключите принудительное применение после его
+							включения, MFA все равно останется включенным для старых
+							пользователей.
 						</Text>
 					</Flex>
 					<Flex justifyContent="start" mb={3}>
@@ -190,15 +200,18 @@ const Features = ({ variables, setVariables }: any) => {
 			</Stack>
 			<Divider paddingY={5} />
 			<Text fontSize="md" paddingTop={5} fontWeight="bold" mb={5}>
-				Cookie Security Features
+				Функции безопасности файлов cookie
 			</Text>
 			<Stack spacing={6}>
 				<Flex>
 					<Flex w="100%" alignItems="baseline" flexDir="column">
-						<Text fontSize="sm">Use Secure App Cookie:</Text>
+						<Text fontSize="sm">
+							Использовать безопасный файл cookie приложения:
+						</Text>
 						<Text fontSize="x-small">
-							Note: If you set this to insecure, it will set{' '}
-							<code>sameSite</code> property of cookie to <code>lax</code> mode
+							Примечание: Если вы установите значение "небезопасный", для
+							свойства <code>sameSite</code> файла cookie будет установлено
+							значение <code>lax</code>
 						</Text>
 					</Flex>
 					<Flex justifyContent="start">
@@ -211,7 +224,9 @@ const Features = ({ variables, setVariables }: any) => {
 				</Flex>
 				<Flex>
 					<Flex w="100%" alignItems="baseline" flexDir="column">
-						<Text fontSize="sm">Use Secure Admin Cookie:</Text>
+						<Text fontSize="sm">
+							Использовать безопасный файл cookie администратора:
+						</Text>
 					</Flex>
 					<Flex justifyContent="start">
 						<InputField

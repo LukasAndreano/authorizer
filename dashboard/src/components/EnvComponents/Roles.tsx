@@ -10,12 +10,12 @@ const Roles = ({ variables, setVariables }: any) => {
 		<div>
 			{' '}
 			<Text fontSize="md" paddingTop="2%" fontWeight="bold" mb={5}>
-				Roles
+				Роли
 			</Text>
 			<Stack spacing={6} padding="2% 0%">
 				<Flex direction={isNotSmallerScreen ? 'row' : 'column'}>
 					<Flex w="30%" justifyContent="start" alignItems="center">
-						<Text fontSize="sm">Roles:</Text>
+						<Text fontSize="sm">Роли:</Text>
 					</Flex>
 					<Center
 						w={isNotSmallerScreen ? '70%' : '100%'}
@@ -32,7 +32,7 @@ const Roles = ({ variables, setVariables }: any) => {
 				</Flex>
 				<Flex direction={isNotSmallerScreen ? 'row' : 'column'}>
 					<Flex w="30%" justifyContent="start" alignItems="center">
-						<Text fontSize="sm">Default Roles:</Text>
+						<Text fontSize="sm">Стандартные роли:</Text>
 					</Flex>
 					<Center
 						w={isNotSmallerScreen ? '70%' : '100%'}
@@ -47,7 +47,7 @@ const Roles = ({ variables, setVariables }: any) => {
 				</Flex>
 				<Flex direction={isNotSmallerScreen ? 'row' : 'column'}>
 					<Flex w="30%" justifyContent="start" alignItems="center">
-						<Text fontSize="sm">Protected Roles:</Text>
+						<Text fontSize="sm">Защищенные роли:</Text>
 					</Flex>
 					<Center
 						w={isNotSmallerScreen ? '70%' : '100%'}

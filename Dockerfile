@@ -16,6 +16,7 @@ WORKDIR /authorizer
 COPY app app
 COPY dashboard dashboard
 COPY Makefile .
+
 RUN apk add build-base &&\
     make build-app && \
     make build-dashboard
