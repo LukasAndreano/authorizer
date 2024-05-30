@@ -25,7 +25,7 @@ export default function SignUp({
 			<AuthorizerSocialLogin urlProps={urlProps} />
 			<AuthorizerSignup urlProps={urlProps} />
 			<FooterContent>
-				Уже есть аккаунт? <Link to="/app"> Войти</Link>
+				Уже есть аккаунт? <Link to="/app">Войти</Link>
 			</FooterContent>
 		</Fragment>
 	);

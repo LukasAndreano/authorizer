@@ -32,12 +32,12 @@ const FooterContent = styled.div`
 export default function Login({ urlProps }: { urlProps: Record<string, any> }) {
 	const { config } = useAuthorizer();
 	const [view, setView] = useState<VIEW_TYPES>(VIEW_TYPES.LOGIN);
-	const isBasicAuth = config.is_basic_authentication_enabled;
+
 	return (
 		<Fragment>
 			{view === VIEW_TYPES.LOGIN && (
 				<Fragment>
-					<h1 style={{ textAlign: 'center' }}>Login</h1>
+					<h1 style={{ textAlign: 'center' }}>Вход в аккаунт</h1>
 					<AuthorizerSocialLogin urlProps={urlProps} />
 					<br />
 					{(config.is_basic_authentication_enabled ||
@@ -90,7 +90,7 @@ export default function Login({ urlProps }: { urlProps: Record<string, any> }) {
 				!config.is_magic_link_login_enabled &&
 				config.is_sign_up_enabled && (
 					<FooterContent>
-						Нет аккаунта? &nbsp; <Link to="/app/signup"> Создать</Link>
+						Нет аккаунта? &nbsp; <Link to="/app/signup">Создать</Link>
 					</FooterContent>
 				)}
 		</Fragment>
