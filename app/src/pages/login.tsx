@@ -90,7 +90,7 @@ export default function Login({ urlProps }: { urlProps: Record<string, any> }) {
 				!config.is_magic_link_login_enabled &&
 				config.is_sign_up_enabled && (
 					<FooterContent>
-						Нет аккаунта? &nbsp; <Link to="/app/signup">Создать</Link>
+						Нет аккаунта? <Link to="/app/signup">Создать</Link>
 					</FooterContent>
 				)}
 		</Fragment>
